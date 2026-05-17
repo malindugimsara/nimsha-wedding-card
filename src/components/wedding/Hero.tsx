@@ -123,13 +123,31 @@ export const Hero = ({ onOpenInvitation, opened }: Props) => {
         )}
       </div>
 
-      {/* Scroll hint */}
+     {/* Scroll hint */}
       <motion.div
-        animate={{ y: [0, 10, 0] }}
-        transition={{ duration: 2, repeat: Infinity }}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 text-primary/60 text-xs font-display tracking-widest z-20"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1.5, duration: 1 }}
+        onClick={() => window.scrollTo({ top: window.innerHeight, behavior: "smooth" })}
+        className="absolute bottom-6 md:bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 z-20 cursor-pointer group"
       >
-        ↓ SCROLL
+        {/* Animated Mouse Icon */}
+        <div className="w-5 h-8 md:w-6 md:h-10 border-2 border-primary/40 rounded-full flex justify-center p-1 group-hover:border-primary/80 transition-colors">
+          <motion.div
+            animate={{ y: [0, 12, 0], opacity: [1, 0.2, 1] }}
+            transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+            className="w-1 h-1.5 md:w-1.5 md:h-2 bg-primary/80 rounded-full"
+          />
+        </div>
+        
+        {/* Pulsing Text */}
+        <motion.div
+          animate={{ opacity: [0.4, 1, 0.4] }}
+          transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+          className="text-primary text-[10px] md:text-xs font-display tracking-[0.2em] md:tracking-[0.3em] uppercase whitespace-nowrap mt-1"
+        >
+          {lang === "en" ? "Scroll to Explore" : "පහළට බලන්න"}
+        </motion.div>
       </motion.div>
     </section>
   );
