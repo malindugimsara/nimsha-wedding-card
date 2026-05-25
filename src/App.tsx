@@ -5,6 +5,8 @@ import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import Index from "./pages/Index.tsx";
 import NotFound from "./pages/NotFound.tsx";
+// 1. ADDED: InviteGenerator component eka import karanna
+import { InviteGenerator } from "./pages/InviteGenerator.tsx"; 
 import { Analytics } from "@vercel/analytics/react"
 
 const queryClient = new QueryClient();
@@ -17,6 +19,10 @@ const App = () => (
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Index />} />
+          
+          {/* 2. ADDED: Admin/Generator Route eka damma */}
+          <Route path="/admin" element={<InviteGenerator />} />
+
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

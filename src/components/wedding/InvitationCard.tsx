@@ -1,3 +1,4 @@
+import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { FaMapMarkerAlt } from "react-icons/fa";
 import { wedding } from "@/lib/wedding";
@@ -9,11 +10,31 @@ export const InvitationCard = () => {
   const { lang } = useWedding();
   const isEn = lang === "en";
 
+  // State for Name and Title
+  const [guestName, setGuestName] = useState("");
+  // Default title eka widihata meka thiyanawa, URL eken dunnoth meka wenas wenawa
+  const [guestTitle, setGuestTitle] = useState("Mr. & Mrs. / Mrs. / Mr. / Miss. / Family");
+
+  useEffect(() => {
+    const searchParams = new URLSearchParams(window.location.search);
+    
+    // Name eka gannawa
+    const name = searchParams.get("name");
+    if (name) {
+      setGuestName(name);
+    }
+
+    // Title eka gannawa
+    const title = searchParams.get("title");
+    if (title) {
+      setGuestTitle(title);
+    }
+  }, []);
+
   return (
     <section className="relative lg:py-24 bg-gradient-soft">
       <div className="container max-w-3xl relative">
         
-        {/* ADDED: Background Glow Effect to make the card pop */}
         <div className="absolute -inset-2 md:-inset-4 bg-gradient-to-r from-primary/30 via-primary/5 to-primary/30 rounded-[2.5rem] blur-2xl opacity-70 pointer-events-none" />
 
         <motion.div
@@ -21,22 +42,41 @@ export const InvitationCard = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
-          // UPDATED: Added shadow-2xl, stronger border, and inner ring for a highlighted 3D look
           className="relative glass-card bg-card/95 backdrop-blur-xl rounded-[2rem] p-10 md:p-16 text-center overflow-hidden border border-primary/50 shadow-[0_20px_60px_-15px_rgba(212,175,55,0.3)] ring-1 ring-inset ring-white/50"
         >
           <Sparkles count={8} />
           
-          {/* Corner Images */}
           <img src={gallery6} alt="" aria-hidden className="absolute -top-12 -left-12 w-40 opacity-30 mix-blend-multiply dark:mix-blend-screen rotate-12" />
           <img src={gallery6} alt="" aria-hidden className="absolute -bottom-12 -right-12 w-40 opacity-30 mix-blend-multiply dark:mix-blend-screen -rotate-180" />
 
-          {/* Header — Shri Subha Mangalam */}
           <h3 className={`font-script text-4xl md:text-5xl text-gold-gradient mb-2 relative z-10 ${!isEn ? "font-sinhala font-semibold" : ""}`}>
             {isEn ? wedding.invitationHeader.en : wedding.invitationHeader.si}
           </h3>
+
+          {/* Dynamic Guest Name & Title Section */}
+          {guestName && (
+            <div className="relative z-10 my-6 flex flex-col items-center justify-center animate-fade-in">
+              <p className={`text-foreground/80 text-sm md:text-base uppercase tracking-widest mb-1 ${!isEn ? "font-sinhala" : "font-serif"}`}>
+                Request the honour of your presence
+              </p>
+              
+              {/* Dynamic Title Eka Methanata Damma */}
+              <p className={`text-foreground/70 text-xs md:text-sm uppercase tracking-wider mb-5 ${!isEn ? "font-sinhala" : "font-serif"}`}>
+                {guestTitle}
+              </p>
+              
+              <h2 className="text-2xl md:text-3xl font-semibold text-primary-deep border-b-[2px] border-dotted border-primary/60 pb-2 mb-5 px-8 min-w-[250px] inline-block text-center font-display">
+                {guestName}
+              </h2>
+              
+              <p className={`text-foreground/80 text-sm md:text-base uppercase tracking-widest mt-1 ${!isEn ? "font-sinhala" : "font-serif"}`}>
+                To celebrate our marriage of
+              </p>
+            </div>
+          )}
+
           <Ornament className="text-primary w-40 mx-auto mb-8 relative z-10" />
 
-          {/* Bride parents */}
           <p className={`text-foreground/85 text-base md:text-lg mb-2 leading-relaxed relative z-10 ${!isEn ? "font-sinhala" : "font-serif italic"}`}>
             {isEn ? wedding.brideParents.en : wedding.brideParents.si}
           </p>
@@ -57,7 +97,6 @@ export const InvitationCard = () => {
 
           <Ornament className="text-primary w-48 mx-auto mt-8 mb-6 relative z-10" />
 
-          {/* Date & venue block */}
           <div className={`text-xl md:text-2xl text-primary-deep font-bold relative z-10 ${!isEn ? "font-sinhala" : "font-display tracking-[0.2em]"}`}>
             {isEn ? wedding.ceremony.date : wedding.ceremony.dateSi}
           </div>
