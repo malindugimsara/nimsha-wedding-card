@@ -45,10 +45,9 @@ export const EnvelopeOpening = ({ open, onComplete }: Props) => {
           <div className="relative flex flex-col items-center px-6">
             <motion.p
               initial={{ opacity: 0, y: -10 }}
-              // FIXED: The text will now fade out (opacity 0) when the envelope is opening
               animate={{ opacity: opening ? 0 : 1, y: 0 }}
               transition={{ delay: 0.2, duration: 0.5 }}
-              className="relative z-50 font-couple text-5xl md:text-6xl text-gold-gradient mb-12 tracking-wide"
+              className="relative z-50 font-couple text-5xl md:text-6xl text-gold-gradient mb-12 tracking-wide text-center"
             >
               {lang === "en" ? "Two Hearts, One Journey" : "ශ්‍රී සුභ මංගලම්"}
             </motion.p>
@@ -170,7 +169,7 @@ export const EnvelopeOpening = ({ open, onComplete }: Props) => {
               </div>
             </div>
 
-            <Ornament className="text-primary w-56 mt-8 mb-4 relative z-50" />
+            <Ornament className="text-primary w-56 mt-8 mb-2 relative z-50" />
 
             <motion.p
               initial={{ opacity: 0 }}
@@ -181,13 +180,28 @@ export const EnvelopeOpening = ({ open, onComplete }: Props) => {
               {lang === "en" ? "You're Invited" : "ඔබට ආරාධනා"}
             </motion.p>
 
+            {/* Highlighted Open Invitation Button */}
             {!opening && (
               <motion.button
                 initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.8 }}
+                animate={{ 
+                  opacity: 1, 
+                  y: 0,
+                  scale: [1, 1.05, 1],
+                  boxShadow: [
+                    "0 5px 15px rgba(217, 119, 6, 0.2)",
+                    "0 0 25px 8px rgba(217, 119, 6, 0.6)",
+                    "0 5px 15px rgba(217, 119, 6, 0.2)",
+                  ]
+                }}
+                transition={{ 
+                  opacity: { delay: 0.8, duration: 0.5 },
+                  y: { delay: 0.8, duration: 0.5 },
+                  scale: { delay: 1.3, repeat: Infinity, duration: 2, ease: "easeInOut" },
+                  boxShadow: { delay: 1.3, repeat: Infinity, duration: 2, ease: "easeInOut" }
+                }}
                 onClick={handleOpen}
-                className="mt-8 inline-flex items-center gap-3 px-10 py-4 rounded-full bg-gold-gradient text-primary-foreground font-display text-xs tracking-[0.3em] uppercase shadow-elegant hover:shadow-glow transition-all hover:scale-105 shimmer relative z-50"
+                className="mt-6 inline-flex justify-center items-center gap-3 w-[85vw] max-w-[300px] md:w-auto md:px-10 py-4 rounded-full bg-gold-gradient text-primary-foreground font-display text-[13px] md:text-xs tracking-[0.2em] md:tracking-[0.3em] uppercase shadow-elegant hover:shadow-glow transition-all active:scale-95 shimmer relative z-50 border border-amber-300/40"
               >
                 {lang === "en" ? "Open Invitation" : "ආරාධනය විවෘත කරන්න"}
                 <span>✦</span>
