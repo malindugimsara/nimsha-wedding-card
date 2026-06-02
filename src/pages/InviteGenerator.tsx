@@ -15,7 +15,7 @@ export const InviteGenerator = () => {
   const inviteLink = `${baseUrl}/?name=${encodeURIComponent(guestName)}&title=${encodeURIComponent(title)}`;
   
   // WhatsApp Message Template (Cleanly formatted without extra spaces)
-  const messageTemplate = `Hello ${title} ${guestName},\n\nWe warmly invite you to celebrate our wedding with us! ✨💍\n\nPlease click the link below to view your invitation:\n${inviteLink}`;
+  const messageTemplate = `Hello ${title} ${guestName},\n\nWe warmly invite you to celebrate our wedding with us! ✨💍\n\nPlease click the link below to view your invitation:\n\n${inviteLink}`;
 
   const handleWhatsAppShare = () => {
     if (!guestName.trim()) {
