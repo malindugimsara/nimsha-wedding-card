@@ -37,7 +37,7 @@ export const Countdown = () => {
     <section className="relative py-24 bg-gradient-radial overflow-hidden">
       <div className="container text-center relative">
         <Ornament className="text-primary w-40 mx-auto mb-4" />
-        <h2 className="font-script text-4xl md:text-6xl text-gold-gradient mb-2">{labels.title}</h2>
+        <h2 className="font-script text-4xl md:text-6xl text-gold-gradient mb-2 py-4 px-2">{labels.title}</h2>
         <p className="font-serif italic text-muted-foreground mb-12">
           {wedding.date.toLocaleDateString("en-US", { weekday: "long", month: "long", day: "numeric", year: "numeric" })}
         </p>

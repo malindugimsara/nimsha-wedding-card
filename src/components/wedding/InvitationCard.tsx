@@ -49,7 +49,7 @@ export const InvitationCard = () => {
           <img src={gallery6} alt="" aria-hidden className="absolute -top-12 -left-12 w-40 opacity-30 mix-blend-multiply dark:mix-blend-screen rotate-12" />
           <img src={gallery6} alt="" aria-hidden className="absolute -bottom-12 -right-12 w-40 opacity-30 mix-blend-multiply dark:mix-blend-screen -rotate-180" />
 
-          <h3 className={`font-script text-4xl md:text-5xl text-gold-gradient mb-2 relative z-10 ${!isEn ? "font-sinhala font-semibold" : ""}`}>
+          <h3 className={`py-2 font-script text-4xl md:text-5xl text-gold-gradient mb-2 relative z-10 ${!isEn ? "font-sinhala font-semibold" : ""}`}>
             {isEn ? wedding.invitationHeader.en : wedding.invitationHeader.si}
           </h3>
 
@@ -80,14 +80,14 @@ export const InvitationCard = () => {
           <p className={`text-foreground/85 text-base md:text-lg mb-2 leading-relaxed relative z-10 ${!isEn ? "font-sinhala" : "font-serif italic"}`}>
             {isEn ? wedding.brideParents.en : wedding.brideParents.si}
           </p>
-          <h2 className={`text-6xl md:text-7xl text-gold-gradient leading-tight my-3 relative z-10 drop-shadow-sm ${!isEn ? "font-sinhala font-bold" : "font-couple"}`}>
+          <h2 className={`py-2 px-2 text-6xl md:text-7xl text-gold-gradient leading-tight my-3 relative z-10 drop-shadow-sm ${!isEn ? "font-sinhala font-bold" : "font-couple"}`}>
             {isEn ? wedding.bride.en : wedding.bride.si}
           </h2>
 
           <p className={`text-foreground/85 text-base md:text-lg my-4 leading-relaxed relative z-10 ${!isEn ? "font-sinhala" : "font-serif italic"}`}>
             {isEn ? wedding.groomParents.en : wedding.groomParents.si}
           </p>
-          <h2 className={`text-6xl md:text-7xl text-gold-gradient leading-tight my-3 relative z-10 drop-shadow-sm ${!isEn ? "font-sinhala font-bold" : "font-couple"}`}>
+          <h2 className={`py-2 text-6xl md:text-7xl text-gold-gradient leading-tight my-3 relative z-10 drop-shadow-sm ${!isEn ? "font-sinhala font-bold" : "font-couple"}`}>
             {isEn ? wedding.groom.en : wedding.groom.si}
           </h2>
 

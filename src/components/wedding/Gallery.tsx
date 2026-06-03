@@ -24,13 +24,13 @@ export const Gallery = () => {
   const [lightbox, setLightbox] = useState<string | null>(null);
 
   return (
-    <section id="gallery" className="relative py-24 bg-gradient-soft overflow-hidden">
+    <section id="gallery" className="relative py-24 bg-gradient-radial overflow-hidden">
       <div className="container">
         <div className="text-center mb-12">
           <p className="font-display text-xs tracking-[0.4em] uppercase text-primary-deep mb-3">
             {lang === "en" ? "Captured Moments" : "සිහිවටන"}
           </p>
-          <h2 className="font-script text-5xl md:text-7xl text-gold-gradient">
+          <h2 className="font-script text-5xl md:text-7xl text-gold-gradient py-4 px-2">
             {lang === "en" ? "Our Gallery" : "ගැලරිය"}
           </h2>
           <Ornament className="text-primary w-48 mx-auto mt-4" />

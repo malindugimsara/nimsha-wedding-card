@@ -28,35 +28,25 @@ export const Hero = ({ onOpenInvitation, opened }: Props) => {
       <Sparkles count={10} />
 
       {/* Main Content Container */}
-      <div className="relative container z-20 text-center px-4 sm:px-6 flex flex-col items-center justify-center py-20">
-        {guestName && (
-          <motion.p
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 }}
-            className="font-script text-2xl md:text-3xl text-primary mb-4"
-          >
-            {lang === "en" ? `Dear ${guestName},` : `ආදරණීය ${guestName},`}
-          </motion.p>
-        )}
-
+      <div className="relative container z-[50] text-center px-4 sm:px-6 flex flex-col items-center justify-center py-20">
+      
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          className="font-display text-[10px] md:text-sm tracking-[0.3em] md:tracking-[0.4em] uppercase text-primary-deep mb-6"
+          className="relative z-10 font-front font-display text-[10px] md:text-sm tracking-[0.3em] md:tracking-[0.4em] uppercase text-primary-deep mb-6"
         >
           {lang === "en" ? "You are warmly invited" : "ඔබට ආදරයෙන් ආරාධනා කරමි"}
         </motion.p>
 
-        <Ornament className="text-primary w-40 md:w-64 mx-auto mb-6" />
+        <Ornament className="relative z-10 text-primary w-40 md:w-64 mx-auto mb-6" />
 
-        {/* Bride Name */}
+        {/* Bride Name - FIXED: Changed leading-[0.9] to leading-[1.2] and added py-4 px-2 */}
         <motion.h1
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 1, delay: 0.3 }}
-          className="font-couple text-6xl min-[375px]:text-7xl sm:text-8xl md:text-9xl lg:text-[10rem] leading-[0.9] text-gold-gradient animate-heartbeat"
+          className="relative z-10 font-couple text-6xl min-[375px]:text-7xl sm:text-8xl md:text-9xl lg:text-[10rem] leading-[1.2] py-4 px-2 text-gold-gradient animate-heartbeat"
         >
           {lang === "en" ? wedding.bride.en : wedding.bride.si}
         </motion.h1>
@@ -65,29 +55,29 @@ export const Hero = ({ onOpenInvitation, opened }: Props) => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.6 }}
-          className="font-display text-xl md:text-3xl my-2 text-primary tracking-widest"
+          className="relative z-10 font-display text-xl md:text-3xl my-2 text-primary tracking-widest"
         >
           &
         </motion.div>
 
-        {/* Groom Name */}
+        {/* Groom Name - FIXED: Changed leading-[0.9] to leading-[1.2] and added py-4 px-2 */}
         <motion.h1
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 1, delay: 0.5 }}
-          className="font-couple text-6xl min-[375px]:text-7xl sm:text-8xl md:text-9xl lg:text-[10rem] leading-[0.9] text-gold-gradient animate-heartbeat"
+          className="relative z-10 font-couple text-6xl min-[375px]:text-7xl sm:text-8xl md:text-9xl lg:text-[10rem] leading-[1.2] py-4 px-2 text-gold-gradient animate-heartbeat"
         >
           {lang === "en" ? wedding.groom.en : wedding.groom.si}
         </motion.h1>
 
-        <Ornament className="text-primary w-40 md:w-64 mx-auto mt-8 mb-6" />
+        <Ornament className="relative z-10 text-primary w-40 md:w-64 mx-auto mt-8 mb-6" />
 
         {/* Date */}
         <motion.p
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.9 }}
-          className="font-display tracking-[0.2em] md:tracking-[0.25em] text-xs md:text-base text-foreground/80 uppercase"
+          className="relative z-10 font-display tracking-[0.2em] md:tracking-[0.25em] text-xs md:text-base text-foreground/80 uppercase"
         >
           {dateStr}
         </motion.p>
@@ -97,18 +87,18 @@ export const Hero = ({ onOpenInvitation, opened }: Props) => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 1 }}
-          className="font-serif italic text-sm md:text-lg text-muted-foreground mt-2 px-4"
+          className="relative z-10 font-serif italic text-sm md:text-lg text-muted-foreground mt-2 px-4"
         >
           {wedding.ceremony.venue} · {wedding.ceremony.address}
         </motion.p>
 
-        {/* FIXED: Swipe/Scroll Hint placed directly under the Venue & Address */}
+        {/* Swipe/Scroll Hint */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 1.4, duration: 1 }}
           onClick={() => window.scrollTo({ top: window.innerHeight, behavior: "smooth" })}
-          className="mt-10 cursor-pointer z-20"
+          className="relative mt-10 cursor-pointer z-20"
         >
           <div className="flex flex-col items-center px-6 py-2.5 rounded-[2rem] bg-background/40 backdrop-blur-md border border-primary/20 shadow-[0_4px_20px_rgba(0,0,0,0.1)] active:scale-95 transition-transform whitespace-nowrap">
             

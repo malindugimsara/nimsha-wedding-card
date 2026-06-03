@@ -7,12 +7,12 @@ import { Ornament } from "./Decorations";
 export const SaveTheDate = () => {
   const { lang } = useWedding();
   return (
-    <section className="relative py-24 bg-gradient-soft overflow-hidden">
+    <section className="relative py-24 bg-gradient-radial overflow-hidden">
       <div className="container max-w-3xl text-center">
         <p className="font-display text-xs tracking-[0.4em] uppercase text-primary-deep mb-3">
           {lang === "en" ? "Don't Miss It" : "අමතක නොකරන්න"}
         </p>
-        <h2 className="font-script text-5xl md:text-7xl text-gold-gradient mb-3">
+        <h2 className="font-script text-5xl md:text-7xl text-gold-gradient mb-3 py-4 px-2">
           {lang === "en" ? "Save Our Date" : "දිනය සුරකින්න"}
         </h2>
         <Ornament className="text-primary w-48 mx-auto mb-6" />
