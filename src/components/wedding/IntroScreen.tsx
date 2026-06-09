@@ -1,6 +1,6 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useEffect, useState } from "react";
-import coupleIntro from "@/assets/couple-intro.png";
+import coupleIntro from "@/assets/couple-intro.webp";
 import { Sparkles } from "./Decorations";
 
 interface Props {

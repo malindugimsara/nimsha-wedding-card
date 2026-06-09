@@ -40,7 +40,7 @@ export const Footer = () => {
         </div>
 
         <p className="mt-4 lg:mt-8 font-serif italic text-foreground/70 flex items-center justify-center gap-2">
-          CodeCraft - Design with <FaHeart className="text-red-500" /> by Malindu
+          CodeCraft - Design with <FaHeart className="text-yellow-400" /> by Malindu
         </p>
         <p className="font-display text-[10px] tracking-[0.3em] uppercase text-muted-foreground mt-3">
           © {new Date().getFullYear()} MG. All rights reserved.
