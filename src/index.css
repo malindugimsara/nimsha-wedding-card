@@ -228,3 +228,13 @@
 .animate-sparkle { animation: sparkle 2s ease-in-out infinite; }
 .animate-float-petal { animation: float-petal linear infinite; }
 .animate-fade-up { animation: fade-up 0.8s var(--transition-elegant) both; }
+
+/* Active වෙන dot එකේ පාට වෙනස් කරන්න (උදාහරණයකට Gold පාට) */
+.swiper-pagination-bullet-active {
+  background-color: #d4af37 !important; /* ඔයාට ඕනෙ පාටක් දෙන්න */
+}
+
+/* අනිත් dots වල පාට වෙනස් කරන්න ඕනෙ නම් */
+.swiper-pagination-bullet {
+  background-color: #a0a0a0; 
+}
