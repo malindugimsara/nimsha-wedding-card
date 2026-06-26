@@ -28,7 +28,7 @@ export const wedding = {
     title: { en: "The Poruwa Ceremony", si: "පෝරුව මංගල්‍යය" },
     time: "11:20 AM",
     timeSi: "පූර්ව භාග 11.20",
-    date: "Saturday, July 1, 2026",
+    date: "Saturday, July 13, 2026",
     dateSi: "2026 ජූලි මස 13 වන දින",
     venue: "Hotel Grand Palace",
     venueSi: "හෝටල් ග්‍රෑන්ඩ් පැලස්",
