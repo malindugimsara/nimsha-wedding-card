@@ -11,7 +11,7 @@ export const wedding = {
     si: "ගමගේ මැතිතුමාගේ සහ එම මැතිනියගේ ආදරණීය පුත්",
   },
   // 11 July 2026, Poruwa Ceremony at 11:20 AM (Sri Lanka time)
-  date: new Date("2026-07-11T11:20:00+05:30"),
+  date: new Date("2026-07-13T11:20:00+05:30"),
   hashtag: "#SandeepaAndNimsha2026",
 
   invitationHeader: { en: "Together with our families", si: "අපගේ පවුල්වල අය සමඟ" },
@@ -42,7 +42,7 @@ export const wedding = {
     time: "10:00 AM to 04:00 PM",
     timeSi: "පෙ.ව.10.00 සිට ප.ව.04.00 දක්වා",
     date: "Monday, July 13, 2026",
-    dateSi: "2026 ජූලි මස 11 වන දින",
+    dateSi: "2026 ජූලි මස 13 වන දින",
     venue: "Hotel Grand Palace",
     venueSi: "හෝටල් ග්‍රෑන්ඩ් පැලස්",
     address: "Hikkaduwa",
