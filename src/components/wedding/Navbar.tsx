@@ -5,9 +5,9 @@ import { wedding } from "@/lib/wedding";
 import { cn } from "@/lib/utils";
 
 const links = [
-  { id: "home", en: "Home", si: "මුල" },
+  { id: "home", en: "Home", si: "මුල් පිටුව" },
   { id: "events", en: "Events", si: "උත්සව" },
-  { id: "gallery", en: "Gallery", si: "ගැලරිය" },
+  { id: "gallery", en: "Gallery", si: "පින්තූර" },
 ];
 
 export const Navbar = () => {
@@ -23,6 +23,7 @@ export const Navbar = () => {
   }, []);
 
   const go = (id: string) => {
+    console.log("Clicked:", id); // පරීක්ෂා කිරීමට
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
     setOpen(false);
   };
@@ -30,21 +31,23 @@ export const Navbar = () => {
   return (
     <header
       className={cn(
-        "fixed top-0 inset-x-0 z-50 transition-all duration-500",
+        // මෙතන z-50 වෙනුවට z-[999] දැම්මා සහ pointer-events-auto දැම්මා
+        "fixed top-0 inset-x-0 z-[999] pointer-events-auto transition-all duration-500",
         scrolled ? "py-3 glass-card !rounded-none border-b" : "py-5 bg-transparent border-transparent"
       )}
     >
-      <nav className="container flex items-center justify-between">
-        <button onClick={() => go("home")} className="font-script text-2xl md:text-3xl text-gold-gradient">
+      <nav className="container flex items-center justify-between relative z-[999]">
+        <button onClick={() => go("home")} className="font-script text-2xl md:text-3xl text-gold-gradient relative z-50">
           {wedding.bride.en[0]} & {wedding.groom.en[0]}
         </button>
 
-        <div className="hidden md:flex items-center gap-8">
+        {/* Desktop Links Container එකටත් z-index එකක් දුන්නා */}
+        <div className="hidden md:flex items-center gap-8 relative z-[999]">
           {links.map((l) => (
             <button
               key={l.id}
               onClick={() => go(l.id)}
-              className="font-display text-xs tracking-[0.2em] uppercase text-foreground/80 hover:text-primary transition-colors relative group"
+              className="font-display text-xs tracking-[0.2em] uppercase text-foreground/80 hover:text-primary transition-colors relative group cursor-pointer pointer-events-auto"
             >
               {lang === "en" ? l.en : l.si}
               <span className="absolute -bottom-1 left-0 right-0 h-px bg-primary scale-x-0 group-hover:scale-x-100 transition-transform" />
@@ -52,24 +55,24 @@ export const Navbar = () => {
           ))}
         </div>
 
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-2 relative z-[999]">
           <button
             onClick={() => setLang(lang === "en" ? "si" : "en")}
-            className="hidden sm:flex h-9 px-3 rounded-full border border-primary/40 text-xs font-display tracking-widest hover:bg-primary/10 transition-colors"
+            className="hidden sm:flex h-9 px-3 rounded-full border border-primary/40 text-xs font-display tracking-widest hover:bg-primary/10 transition-colors pointer-events-auto"
             aria-label="Toggle language"
           >
             {lang === "en" ? "EN | සිං" : "සිං | EN"}
           </button>
           <button
             onClick={toggleTheme}
-            className="h-9 w-9 grid place-items-center rounded-full border border-primary/40 hover:bg-primary/10 transition-colors"
+            className="h-9 w-9 grid place-items-center rounded-full border border-primary/40 hover:bg-primary/10 transition-colors pointer-events-auto"
             aria-label="Toggle theme"
           >
             {theme === "light" ? <HiMoon className="w-4 h-4" /> : <HiSun className="w-4 h-4" />}
           </button>
           <button
             onClick={() => setOpen((v) => !v)}
-            className="md:hidden h-9 w-9 grid place-items-center rounded-full border border-primary/40"
+            className="md:hidden h-9 w-9 grid place-items-center rounded-full border border-primary/40 pointer-events-auto"
             aria-label="Menu"
           >
             {open ? <HiX className="w-5 h-5" /> : <HiMenu className="w-5 h-5" />}
@@ -77,7 +80,9 @@ export const Navbar = () => {
         </div>
       </nav>
 
+      {/* Mobile Menu ... */}
       {open && (
+        // ... (අනෙක් කේතය එලෙසම තබන්න)
         <div className="md:hidden container mt-3 glass-card rounded-2xl p-4 flex flex-col gap-1 animate-fade-up">
           {links.map((l) => (
             <button
@@ -88,12 +93,6 @@ export const Navbar = () => {
               {lang === "en" ? l.en : l.si}
             </button>
           ))}
-          <button
-            onClick={() => setLang(lang === "en" ? "si" : "en")}
-            className="text-left px-4 py-3 rounded-lg hover:bg-primary/10 font-display text-sm tracking-widest"
-          >
-            {lang === "en" ? "සිංහල" : "English"}
-          </button>
         </div>
       )}
     </header>

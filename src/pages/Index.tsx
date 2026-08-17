@@ -12,6 +12,7 @@ import { SaveTheDate } from "@/components/wedding/SaveTheDate";
 import { Footer } from "@/components/wedding/Footer";
 import { FloatingPetals } from "@/components/wedding/Decorations";
 import { MusicPlayer } from "@/components/wedding/MusicPlayer";
+import RSVPForm from "@/components/wedding/RSVPForm";
 
 type Stage = "intro" | "envelope" | "open";
 
@@ -47,6 +48,7 @@ const IndexInner = () => {
             <EventDetails />
             <Gallery />
             <SaveTheDate />
+            <RSVPForm />
             <Footer />
           </main>
         </>

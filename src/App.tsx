@@ -5,9 +5,12 @@ import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import Index from "./pages/Index.tsx";
 import NotFound from "./pages/NotFound.tsx";
-// 1. ADDED: InviteGenerator component eka import karanna
 import { InviteGenerator } from "./pages/InviteGenerator.tsx"; 
 import { Analytics } from "@vercel/analytics/react"
+import RSVPList from "./components/wedding/RSVPList.tsx";
+
+// 1. ADDED: react-hot-toast import කිරීම (නම පැටලෙන්නේ නැති වෙන්න HotToaster ලෙස ගෙන ඇත)
+import { Toaster as HotToaster } from 'react-hot-toast';
 
 const queryClient = new QueryClient();
 
@@ -16,18 +19,23 @@ const App = () => (
     <TooltipProvider>
       <Toaster />
       <Sonner />
+      
+      {/* 2. ADDED: react-hot-toast component එක මෙතනට දැම්මා */}
+      <HotToaster position="top-center" reverseOrder={false} />
+
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Index />} />
           
-          {/* 2. ADDED: Admin/Generator Route eka damma */}
+          {/* Admin/Generator Routes */}
           <Route path="/admin" element={<InviteGenerator />} />
+          <Route path="/admin/rsvps" element={<RSVPList />} />
 
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
-       <Analytics />
+      <Analytics />
     </TooltipProvider>
   </QueryClientProvider>
 );
