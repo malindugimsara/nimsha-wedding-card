@@ -4,7 +4,7 @@ import { FaMapMarkerAlt } from "react-icons/fa";
 import { wedding } from "@/lib/wedding";
 import { useWedding } from "@/lib/wedding-context";
 import { Ornament, Sparkles } from "./Decorations";
-import swanImg from "@/assets/swam.png";
+import swanImg from "@/assets/swam.webp";
 import { LotusDivider } from "./Ornaments";
 
 export const InvitationCard = () => {
@@ -86,7 +86,7 @@ export const InvitationCard = () => {
           <p className={`text-foreground/85 text-sm md:text-base mb-2 leading-relaxed relative z-10 max-w-lg mx-auto ${!isEn ? "font-sinhala" : "font-serif italic"}`}>
             {isEn ? wedding.brideParents.en : wedding.brideParents.si}
           </p>
-          <h2 className={`py-2 px-2 text-5xl md:text-7xl text-gold-gradient leading-[1.2] my-1 relative z-10 drop-shadow-sm ${!isEn ? "font-sinhala font-bold" : "font-couple"}`}>
+          <h2 className={`py-2 px-2 text-5xl md:text-7xl text-gold-gradient py-4 leading-[1.2] my-1 relative z-10 drop-shadow-sm ${!isEn ? "font-sinhala font-bold" : "font-couple"}`}>
             {isEn ? wedding.bride.en : wedding.bride.si}
           </h2>
 
@@ -106,15 +106,15 @@ export const InvitationCard = () => {
           <p className={`text-foreground/85 text-sm md:text-base my-4 leading-relaxed relative z-10 max-w-lg mx-auto ${!isEn ? "font-sinhala" : "font-serif italic"}`}>
             {isEn ? wedding.groomParents.en : wedding.groomParents.si}
           </p>
-          <h2 className={`py-2 text-5xl md:text-7xl text-gold-gradient leading-[1.2] my-1 relative z-10 drop-shadow-sm ${!isEn ? "font-sinhala font-bold" : "font-couple"}`}>
+          <h2 className={`py-2 text-5xl md:text-7xl py-4 text-gold-gradient leading-[1.2] my-1 relative z-10 drop-shadow-sm ${!isEn ? "font-sinhala font-bold" : "font-couple"}`}>
             {isEn ? wedding.groom.en : wedding.groom.si}
           </h2>
 
-          <p className={`text-foreground/90 font-medium text-sm md:text-base mt-8 relative z-10 max-w-lg mx-auto ${!isEn ? "font-sinhala" : "font-serif italic"}`}>
+          <p className={`text-foreground/90 font-medium text-sm md:text-base mt-6 relative z-10 max-w-lg mx-auto ${!isEn ? "font-sinhala" : "font-serif italic"}`}>
             {isEn ? wedding.invitationWording.en : wedding.invitationWording.si}
           </p>
 
-          <Ornament className="text-primary w-40 md:w-48 mx-auto mt-8 mb-6 relative z-10 opacity-80" />
+          <Ornament className="text-primary w-40 md:w-48 mx-auto mt-6 mb-6 relative z-10 opacity-80" />
 
           <div className={`text-lg md:text-2xl text-primary-deep font-bold relative z-10 ${!isEn ? "font-sinhala" : "font-display tracking-[0.2em]"}`}>
             {isEn ? wedding.ceremony.date : wedding.ceremony.dateSi}
@@ -134,9 +134,9 @@ export const InvitationCard = () => {
             </div>
           </div>
 
-          <p className={`mt-8 text-foreground/80 max-w-xl mx-auto relative z-10 ${!isEn ? "font-sinhala" : "font-serif italic"}`}>
+          {/* <p className={`mt-8 text-foreground/80 max-w-xl mx-auto relative z-10 ${!isEn ? "font-sinhala" : "font-serif italic"}`}>
             {isEn ? wedding.invitedBy.en : wedding.invitedBy.si}
-          </p>
+          </p> */}
 
           <a
             href={wedding.ceremony.mapsUrl}

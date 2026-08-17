@@ -1,9 +1,8 @@
 import { motion, AnimatePresence } from "framer-motion";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { wedding } from "@/lib/wedding";
 import { useWedding } from "@/lib/wedding-context";
 import { Sparkles, Ornament } from "./Decorations";
-
 
 interface Props { open: boolean; onComplete: () => void; }
 
@@ -11,6 +10,17 @@ interface Props { open: boolean; onComplete: () => void; }
 export const EnvelopeOpening = ({ open, onComplete }: Props) => {
   const { lang, setLang } = useWedding();
   const [opening, setOpening] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+
+  // Screen size එක පරීක්ෂා කිරීම
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
 
   const handleOpen = () => {
     if (opening) return;
@@ -19,13 +29,15 @@ export const EnvelopeOpening = ({ open, onComplete }: Props) => {
     setTimeout(onComplete, 2600);
   };
 
+  // Mobile එකේදී කාඩ් එක උඩට යන ප්‍රමාණය අඩු කර ඇත (-135). Desktop එකේදී -210.
+  const letterMoveY = isMobile ? -135 : -210; 
+
   return (
     <AnimatePresence>
       {open && (
         <motion.div
           initial={{ opacity: 1 }}
           exit={{ opacity: 0, transition: { duration: 0.9, ease: "easeInOut" } }}
-          // 1. මෙතැනට onClick සහ cursor-pointer එකතු කළා (මුළු screen එකම click කළ හැක)
           onClick={handleOpen}
           className="fixed inset-0 z-[100] grid place-items-center bg-gradient-radial overflow-hidden cursor-pointer"
         >
@@ -96,10 +108,10 @@ export const EnvelopeOpening = ({ open, onComplete }: Props) => {
                   }}
                 />
 
-                {/* Letter inside */}
+                {/* Letter inside - මෙතන තමයි y අගය dynamically මාරු වෙන්නේ */}
                 <motion.div
                   initial={{ y: 0, opacity: 0 }}
-                  animate={opening ? { y: -210, opacity: 1 } : { y: 0, opacity: 0 }}
+                  animate={opening ? { y: letterMoveY, opacity: 1 } : { y: 0, opacity: 0 }}
                   transition={{ duration: 1.4, delay: 0.9, ease: [0.65, 0, 0.35, 1] }}
                   className="absolute inset-3 z-10 bg-card rounded-sm shadow-card flex flex-col items-center justify-center text-center px-4 border border-primary/30"
                 >
@@ -194,17 +206,11 @@ export const EnvelopeOpening = ({ open, onComplete }: Props) => {
                   opacity: 1, 
                   y: 0,
                   scale: [1, 1.05, 1],
-                  // boxShadow: [
-                  //   "0 5px 15px rgba(217, 119, 6, 0.2)",
-                  //   "0 0 25px 8px rgba(217, 119, 6, 0.6)",
-                  //   "0 5px 15px rgba(217, 119, 6, 0.2)",
-                  // ]
                 }}
                 transition={{ 
                   opacity: { delay: 0.8, duration: 0.5 },
                   y: { delay: 0.8, duration: 0.5 },
                   scale: { delay: 1.3, repeat: Infinity, duration: 2, ease: "easeInOut" },
-                  // boxShadow: { delay: 1.3, repeat: Infinity, duration: 2, ease: "easeInOut" }
                 }}
                 onClick={(e) => {
                   e.stopPropagation(); // Prevent duplicate trigger from parent click

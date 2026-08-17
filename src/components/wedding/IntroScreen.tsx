@@ -9,7 +9,7 @@ interface Props {
 }
 
 // Cinematic full-screen intro shown before the envelope.
-export const IntroScreen = ({ onComplete, duration = 4200 }: Props) => {
+export const IntroScreen = ({ onComplete, duration = 3000 }: Props) => {
   const [visible, setVisible] = useState(true);
 
   useEffect(() => {

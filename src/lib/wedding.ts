@@ -11,7 +11,7 @@ export const wedding = {
     si: "අශෝක මහතාගේ සහ ලලිතා මහත්මියගේ ආදරණීය පුත්",
   },
   // 15 October 2026, Poruwa Ceremony at 09:57 AM (Sri Lanka time)
-  date: new Date("2026-10-15T09:57:00+05:30"),
+  date: new Date("2026-10-15T09:40:00+05:30"),
   hashtag: "#GayanAndThathsarani2026",
 
   invitationHeader: { en: "Together with our families", si: "අපගේ පවුල්වල අය සමඟ" },
@@ -26,8 +26,8 @@ export const wedding = {
 
   ceremony: {
     title: { en: "The Poruwa Ceremony", si: "පෝරුව මංගල්‍යය" },
-    time: "09:57 AM",
-    timeSi: "පෙ.ව. 09.57",
+    time: "09:40 AM",
+    timeSi: "පෙ.ව. 09.40",
     date: "Thursday, October 15, 2026",
     dateSi: "2026 ඔක්තෝබර් මස 15 වන බ්‍රහස්පතින්දා",
     venue: "Hotel Alakamanda",
@@ -39,12 +39,12 @@ export const wedding = {
   },
   reception: {
     title: { en: "Wedding Ceremony", si: "මංගල උත්සවය" },
-    time: "09:00 AM to 04:00 PM",
-    timeSi: "පෙ.ව. 09.00 සිට ප.ව. 04.00 දක්වා",
+    time: "08.30 AM to 03:30 PM",
+    timeSi: "පෙ.ව. 08.30 සිට ප.ව. 03.30 දක්වා",
     date: "Thursday, October 15, 2026",
     dateSi: "2026 ඔක්තෝබර් මස 15 වන බ්‍රහස්පතින්දා",
     venue: "Hotel Alakamanda",
-    venueSi: "හෝටල් අලකමන්දා",
+    venueSi: "හොටෙල් අලකමන්දා",
     address: "Anuradhapura",
     addressSi: "අනුරාධපුර",
     mapsQuery: "Hotel+Alakamanda+Anuradhapura",

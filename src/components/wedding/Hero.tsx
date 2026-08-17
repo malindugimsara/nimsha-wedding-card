@@ -3,7 +3,7 @@ import { useWedding } from "@/lib/wedding-context";
 import { wedding } from "@/lib/wedding";
 import { Ornament, Sparkles } from "./Decorations";
 import heroFloral from "@/assets/hero-floral.png";
-import swanImg from "@/assets/swam.png"; 
+import swanImg from "@/assets/swam.webp"; 
 import { LotusDivider } from "./Ornaments";
 
 interface Props { 
@@ -73,7 +73,7 @@ export const Hero = ({ onOpenInvitation, opened }: Props) => {
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 1, delay: 0.2 }}
-          className={`relative z-10 leading-[1.3] py-1 px-2 text-gold-gradient drop-shadow-sm ${isEn ? "font-couple text-7xl sm:text-8xl md:text-9xl" : "font-sinhala font-bold text-5xl sm:text-6xl md:text-7xl"}`}
+          className={`relative z-10 leading-[1.3] py-3 px-2 text-gold-gradient drop-shadow-sm ${isEn ? "font-couple text-7xl sm:text-8xl md:text-9xl" : "font-sinhala font-bold text-5xl sm:text-6xl md:text-7xl"}`}
         >
           {isEn ? wedding.bride.en : wedding.bride.si}
         </motion.h1>
@@ -92,7 +92,7 @@ export const Hero = ({ onOpenInvitation, opened }: Props) => {
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 1, delay: 0.4 }}
-          className={`relative z-10 leading-[1.3] py-1 px-2 text-gold-gradient drop-shadow-sm ${isEn ? "font-couple text-7xl sm:text-8xl md:text-9xl" : "font-sinhala font-bold text-5xl sm:text-6xl md:text-7xl"}`}
+          className={`relative z-10 leading-[1.3] py-3 px-2 text-gold-gradient drop-shadow-sm ${isEn ? "font-couple text-7xl sm:text-8xl md:text-9xl" : "font-sinhala font-bold text-5xl sm:text-6xl md:text-7xl"}`}
         >
           {isEn ? wedding.groom.en : wedding.groom.si}
         </motion.h1>
