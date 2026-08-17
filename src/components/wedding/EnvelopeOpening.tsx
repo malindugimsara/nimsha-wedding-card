@@ -4,9 +4,10 @@ import { wedding } from "@/lib/wedding";
 import { useWedding } from "@/lib/wedding-context";
 import { Sparkles, Ornament } from "./Decorations";
 
+
 interface Props { open: boolean; onComplete: () => void; }
 
-// First-screen luxury envelope. Opens cinematically only when user clicks the button.
+// First-screen luxury envelope. Opens cinematically when user clicks anywhere on the screen.
 export const EnvelopeOpening = ({ open, onComplete }: Props) => {
   const { lang, setLang } = useWedding();
   const [opening, setOpening] = useState(false);
@@ -24,7 +25,9 @@ export const EnvelopeOpening = ({ open, onComplete }: Props) => {
         <motion.div
           initial={{ opacity: 1 }}
           exit={{ opacity: 0, transition: { duration: 0.9, ease: "easeInOut" } }}
-          className="fixed inset-0 z-[100] grid place-items-center bg-gradient-radial overflow-hidden"
+          // 1. මෙතැනට onClick සහ cursor-pointer එකතු කළා (මුළු screen එකම click කළ හැක)
+          onClick={handleOpen}
+          className="fixed inset-0 z-[100] grid place-items-center bg-gradient-radial overflow-hidden cursor-pointer"
         >
           <Sparkles count={14} />
 
@@ -34,15 +37,18 @@ export const EnvelopeOpening = ({ open, onComplete }: Props) => {
           <FloralCorner className="absolute bottom-0 left-0 w-40 md:w-64 text-primary/60 scale-y-[-1]" />
           <FloralCorner className="absolute bottom-0 right-0 w-40 md:w-64 text-primary/60 scale-x-[-1] scale-y-[-1]" />
 
-          {/* Language toggle (envelope screen only) */}
+          {/* Language toggle (envelope screen only) - Stop propagation so clicking toggle doesn't trigger open */}
           <button
-            onClick={() => setLang(lang === "en" ? "si" : "en")}
-            className="absolute top-5 right-5 px-3 py-1.5 rounded-full border border-primary/50 text-xs font-display tracking-widest hover:bg-primary/10 z-10 backdrop-blur-sm"
+            onClick={(e) => {
+              e.stopPropagation();
+              setLang(lang === "en" ? "si" : "en");
+            }}
+            className="absolute top-5 right-5 px-3 py-1.5 rounded-full border border-primary/50 text-xs font-display tracking-widest hover:bg-primary/10 z-10 backdrop-blur-sm cursor-pointer"
           >
             {lang === "en" ? "සිංහල" : "English"}
           </button>
 
-          <div className="relative flex flex-col items-center px-6">
+          <div className="relative flex flex-col items-center px-6 pointer-events-none">
             <motion.p
               initial={{ opacity: 0, y: -10 }}
               animate={{ opacity: opening ? 0 : 1, y: 0 }}
@@ -169,13 +175,13 @@ export const EnvelopeOpening = ({ open, onComplete }: Props) => {
               </div>
             </div>
 
-            <Ornament className="text-primary w-56 mt-8 mb-2 relative z-50" />
+            <Ornament className="text-primary w-56 mt-8 mb-2 relative z-50 pointer-events-none" />
 
             <motion.p
               initial={{ opacity: 0 }}
               animate={{ opacity: opening ? 0 : 1 }}
               transition={{ delay: 0.5 }}
-              className="font-script text-3xl md:text-4xl text-gold-gradient text-center relative z-50"
+              className="font-script text-3xl md:text-4xl text-gold-gradient text-center relative z-50 pointer-events-none"
             >
               {lang === "en" ? "You're Invited" : "ඔබට ආරාධනා"}
             </motion.p>
@@ -188,20 +194,23 @@ export const EnvelopeOpening = ({ open, onComplete }: Props) => {
                   opacity: 1, 
                   y: 0,
                   scale: [1, 1.05, 1],
-                  boxShadow: [
-                    "0 5px 15px rgba(217, 119, 6, 0.2)",
-                    "0 0 25px 8px rgba(217, 119, 6, 0.6)",
-                    "0 5px 15px rgba(217, 119, 6, 0.2)",
-                  ]
+                  // boxShadow: [
+                  //   "0 5px 15px rgba(217, 119, 6, 0.2)",
+                  //   "0 0 25px 8px rgba(217, 119, 6, 0.6)",
+                  //   "0 5px 15px rgba(217, 119, 6, 0.2)",
+                  // ]
                 }}
                 transition={{ 
                   opacity: { delay: 0.8, duration: 0.5 },
                   y: { delay: 0.8, duration: 0.5 },
                   scale: { delay: 1.3, repeat: Infinity, duration: 2, ease: "easeInOut" },
-                  boxShadow: { delay: 1.3, repeat: Infinity, duration: 2, ease: "easeInOut" }
+                  // boxShadow: { delay: 1.3, repeat: Infinity, duration: 2, ease: "easeInOut" }
                 }}
-                onClick={handleOpen}
-                className="mt-6 inline-flex justify-center items-center gap-3 w-[85vw] max-w-[300px] md:w-auto md:px-10 py-4 rounded-full bg-gold-gradient text-primary-foreground font-display text-[13px] md:text-xs tracking-[0.2em] md:tracking-[0.3em] uppercase shadow-elegant hover:shadow-glow transition-all active:scale-95 shimmer relative z-50 border border-amber-300/40"
+                onClick={(e) => {
+                  e.stopPropagation(); // Prevent duplicate trigger from parent click
+                  handleOpen();
+                }}
+                className="mt-6 inline-flex justify-center items-center gap-3 w-[85vw] max-w-[300px] md:w-auto md:px-10 py-4 rounded-full bg-gold-gradient text-primary-foreground font-display text-[13px] md:text-xs tracking-[0.2em] md:tracking-[0.3em] uppercase shadow-elegant hover:shadow-glow transition-all active:scale-95 shimmer relative z-50 border border-amber-300/40 pointer-events-auto"
               >
                 {lang === "en" ? "Open Invitation" : "ආරාධනය විවෘත කරන්න"}
                 <span>✦</span>
@@ -213,7 +222,7 @@ export const EnvelopeOpening = ({ open, onComplete }: Props) => {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 1.6 }}
-                className="font-script text-2xl text-primary mt-6 relative z-50"
+                className="font-script text-2xl text-primary mt-6 relative z-50 pointer-events-none"
               >
                 {lang === "en" ? "Welcome to our story…" : "අපේ කතාවට සාදරයෙන් පිළිගනිමු…"}
               </motion.p>
