@@ -193,7 +193,8 @@ export const EnvelopeOpening = ({ open, onComplete }: Props) => {
               initial={{ opacity: 0 }}
               animate={{ opacity: opening ? 0 : 1 }}
               transition={{ delay: 0.5 }}
-              className="font-script text-3xl md:text-4xl text-gold-gradient text-center relative z-50 pointer-events-none"
+              className="font-script py-2 px-2
+               text-3xl md:text-4xl text-gold-gradient text-center relative z-50 pointer-events-none"
             >
               {lang === "en" ? "You're Invited" : "ඔබට ආරාධනා"}
             </motion.p>
