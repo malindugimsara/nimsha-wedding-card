@@ -9,15 +9,15 @@ import "swiper/css/effect-coverflow";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 
-import g1 from "@/assets/gallery-1.jpg";
-import g2 from "@/assets/gallery-2.jpg";
-import g3 from "@/assets/gallery-3.jpg";
-import g4 from "@/assets/gallery-4.jpg";
-import g5 from "@/assets/gallery-5.png";
-import g6 from "@/assets/gallery-6.png";
-import g7 from "@/assets/gallery-7.png";
+import g1 from "@/assets/gallery-1.webp";
+import g2 from "@/assets/gallery-2.webp";
+import g3 from "@/assets/gallery-3.webp";
+import g4 from "@/assets/gallery-4.webp";
+import g5 from "@/assets/gallery-5.webp";
+import g6 from "@/assets/gallery-6.webp";
+// import g7 from "@/assets/gallery-7.webp";
 
-const images = [g1, g2, g3, g4, g5, g6, g7];
+const images = [g1, g2, g3, g4, g5, g6];
 
 export const Gallery = () => {
   const { lang } = useWedding();
@@ -83,9 +83,9 @@ export const Gallery = () => {
                     loading="lazy"
                     className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end justify-center pb-6">
+                  {/* <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end justify-center pb-6">
                      <span className="font-script text-3xl text-white drop-shadow-md">✦</span>
-                  </div>
+                  </div> */}
                 </div>
               </div>
             </SwiperSlide>
