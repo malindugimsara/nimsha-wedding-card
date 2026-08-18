@@ -13,7 +13,7 @@ if (typeof window !== "undefined") {
   globalAudio.preload = "auto";
   globalAudio.loop = true;
   globalAudio.volume = 0.45;
-  globalAudio.playbackRate = 0.7;
+  globalAudio.playbackRate = 0.9;
 }
 
 interface Props {
