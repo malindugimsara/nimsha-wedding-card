@@ -72,7 +72,7 @@ export const MusicPlayer = ({ shouldPlay }: Props) => {
     <button
       onClick={() => setMuted((m) => !m)}
       aria-label={muted ? "Unmute music" : "Mute music"}
-      className="fixed bottom-6 right-6 z-40 h-12 w-12 rounded-full bg-gold-gradient text-primary-foreground shadow-elegant hover:shadow-glow grid place-items-center hover:scale-110 transition-all"
+      className=" fixed bottom-6 z-[99] right-6 z-40 h-12 w-12 rounded-full bg-gold-gradient text-primary-foreground shadow-elegant hover:shadow-glow grid place-items-center hover:scale-110 transition-all"
     >
       {muted ? <HiVolumeOff className="w-5 h-5" /> : <HiVolumeUp className="w-5 h-5" />}
     </button>
