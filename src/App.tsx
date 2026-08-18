@@ -11,6 +11,7 @@ import RSVPList from "./components/wedding/RSVPList.tsx";
 
 // 1. ADDED: react-hot-toast import කිරීම (නම පැටලෙන්නේ නැති වෙන්න HotToaster ලෙස ගෙන ඇත)
 import { Toaster as HotToaster } from 'react-hot-toast';
+import RSVPViewerList from "./components/wedding/RSVPViewerList.tsx";
 
 const queryClient = new QueryClient();
 
@@ -28,8 +29,9 @@ const App = () => (
           <Route path="/" element={<Index />} />
           
           {/* Admin/Generator Routes */}
-          <Route path="/admin" element={<InviteGenerator />} />
-          <Route path="/admin/rsvps" element={<RSVPList />} />
+          <Route path="/invitegenerator" element={<InviteGenerator />} />
+          <Route path="/admin/rsvps77" element={<RSVPList />} />
+          <Route path="/viewrsvp" element={<RSVPViewerList />} />
 
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
