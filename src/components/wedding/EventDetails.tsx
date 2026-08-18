@@ -48,22 +48,7 @@ export const EventDetails = () => {
         
         {/* Section Header */}
         <div className="text-center mb-12">
-          <motion.p 
-            initial={{ opacity: 0, y: 10 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className={`uppercase text-primary-deep mb-3 ${isEn ? "font-display text-xs tracking-[0.4em]" : "font-sinhala font-semibold tracking-widest text-sm"}`}
-          >
-            {isEn ? "Save the Moments" : "මොහොත සුරකින්න"}
-          </motion.p>
-          <motion.h2 
-            initial={{ opacity: 0, scale: 0.95 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            className={`text-gold-gradient py-2 px-2 drop-shadow-sm ${isEn ? "font-script text-5xl md:text-7xl" : "font-sinhala font-bold text-4xl md:text-5xl"}`}
-          >
-            {isEn ? "The Celebrations" : "උත්සවය"}
-          </motion.h2>
+          
            <LotusDivider  width="w-20 sm:w-28  mt-4" />
           <Ornament className="text-primary w-40 md:w-56 mx-auto" />
         </div>
@@ -93,9 +78,6 @@ export const EventDetails = () => {
                 <LotusCorner className="absolute bottom-2 left-2 w-16 text-primary/20 scale-y-[-1]" />
                 <LotusCorner className="absolute bottom-2 right-2 w-16 text-primary/20 scale-x-[-1] scale-y-[-1]" />
 
-                <div className={`uppercase text-primary mb-3 ${isEn ? "font-display text-xs tracking-[0.3em]" : "font-sinhala font-bold tracking-widest text-sm"}`}>
-                  {isEn ? "Ceremony" : "මංගල්‍යය"}
-                </div>
                 
                 <h3 className={`text-gold-gradient mb-2 py-2 drop-shadow-sm ${isEn ? "font-script text-4xl md:text-5xl" : "font-sinhala font-bold text-2xl md:text-3xl"}`}>
                   {title}

@@ -23,7 +23,7 @@ export const Navbar = () => {
   }, []);
 
   const go = (id: string) => {
-    console.log("Clicked:", id); // පරීක්ෂා කිරීමට
+    console.log("Clicked:", id); 
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
     setOpen(false);
   };
@@ -31,7 +31,6 @@ export const Navbar = () => {
   return (
     <header
       className={cn(
-        // මෙතන z-50 වෙනුවට z-[999] දැම්මා සහ pointer-events-auto දැම්මා
         "fixed top-0 inset-x-0 z-[999] pointer-events-auto transition-all duration-500",
         scrolled ? "py-3 glass-card !rounded-none border-b" : "py-5 bg-transparent border-transparent"
       )}
@@ -41,7 +40,7 @@ export const Navbar = () => {
           {wedding.bride.en[0]} & {wedding.groom.en[0]}
         </button>
 
-        {/* Desktop Links Container එකටත් z-index එකක් දුන්නා */}
+        {/* Desktop Links Container */}
         <div className="hidden md:flex items-center gap-8 relative z-[999]">
           {links.map((l) => (
             <button
@@ -56,13 +55,15 @@ export const Navbar = () => {
         </div>
 
         <div className="flex items-center gap-2 relative z-[999]">
+          {/* FIX: Removed 'hidden sm:flex' and added 'flex items-center' */}
           <button
             onClick={() => setLang(lang === "en" ? "si" : "en")}
-            className="hidden sm:flex h-9 px-3 rounded-full border border-primary/40 text-xs font-display tracking-widest hover:bg-primary/10 transition-colors pointer-events-auto"
+            className="flex items-center h-9 px-3 rounded-full border border-primary/40 text-xs font-display tracking-widest hover:bg-primary/10 transition-colors pointer-events-auto"
             aria-label="Toggle language"
           >
             {lang === "en" ? "EN | සිං" : "සිං | EN"}
           </button>
+          
           <button
             onClick={toggleTheme}
             className="h-9 w-9 grid place-items-center rounded-full border border-primary/40 hover:bg-primary/10 transition-colors pointer-events-auto"
@@ -80,9 +81,8 @@ export const Navbar = () => {
         </div>
       </nav>
 
-      {/* Mobile Menu ... */}
+      {/* Mobile Menu */}
       {open && (
-        // ... (අනෙක් කේතය එලෙසම තබන්න)
         <div className="md:hidden container mt-3 glass-card rounded-2xl p-4 flex flex-col gap-1 animate-fade-up">
           {links.map((l) => (
             <button

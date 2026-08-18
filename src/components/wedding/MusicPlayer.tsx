@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { HiVolumeUp, HiVolumeOff } from "react-icons/hi";
 
-const TRACK = "/bgmusic.mp3";
+const TRACK = "/bgmusic1.mp3";
 
 // Create the audio instance outside the component (if in browser).
 // මේකෙන් site එක load වෙච්ච ගමන්ම music එකත් download වෙන්න පටන් ගන්නවා.

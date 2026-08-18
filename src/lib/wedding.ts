@@ -14,10 +14,10 @@ export const wedding = {
   date: new Date("2026-10-15T09:40:00+05:30"),
   hashtag: "#GayanAndThathsarani2026",
 
-  invitationHeader: { en: "Together with our families", si: "අපගේ පවුල්වල අය සමඟ" },
+  invitationHeader: { en: "Together with our families", si: "ශ්‍රී  සුබ  මංගලම්" },
   invitationWording: {
     en: "Request the honour of your presence",
-    si: "ඔබගේ පැමිණීමේ ගෞරවය අපේක්ෂා කරන්නෙමු",
+    si: "සමග අතිනත ගැනීමේ ප්‍රීතිය නිමිත්තෙන් ඔබට කෙරෙන සුහද ඇරයුමයි.",
   },
   invitedBy: {
     en: "To their wedding ceremony.",

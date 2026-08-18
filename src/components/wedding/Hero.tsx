@@ -27,8 +27,7 @@ export const Hero = ({ onOpenInvitation, opened }: Props) => {
         <img
           src={heroFloral}
           alt=""
-          // dark:mix-blend-screen හෝ dark:mix-blend-soft-light භාවිතා කරන්න
-          className="w-full h-full object-cover opacity-80 dark:opacity-40 mix-blend-multiply dark:mix-blend-screen"
+          className="w-full h-full object-cover opacity-100 dark:opacity-40 mix-blend-multiply dark:mix-blend-screen"
           width={1536}
           height={1920}
         />
@@ -59,7 +58,8 @@ export const Hero = ({ onOpenInvitation, opened }: Props) => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          className={`relative z-10 font-front uppercase text-primary-deep mb-6 mt-10 ${isEn ? "font-display text-[10px] md:text-sm tracking-[0.3em]" : "font-sinhala text-sm md:text-base tracking-widest font-semibold"}`}
+          // Increased En size: text-xs md:text-base (was text-[10px] md:text-sm)
+          className={`relative z-10 font-front uppercase text-primary-deep mb-6 mt-10 ${isEn ? "font-display text-xs md:text-base tracking-[0.3em]" : "font-sinhala text-sm md:text-base tracking-widest font-semibold"}`}
         >
           {isEn ? "You are warmly invited" : "ඔබට ආදරයෙන් ආරාධනා කරමි"}
         </motion.p>
@@ -73,7 +73,8 @@ export const Hero = ({ onOpenInvitation, opened }: Props) => {
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 1, delay: 0.2 }}
-          className={`relative z-10 leading-[1.3] py-3 px-2 text-gold-gradient drop-shadow-sm ${isEn ? "font-couple text-7xl sm:text-8xl md:text-9xl" : "font-sinhala font-bold text-5xl sm:text-6xl md:text-7xl"}`}
+          // Increased En size: text-8xl sm:text-9xl md:text-[10rem] (was text-7xl sm:text-8xl md:text-9xl)
+          className={`relative z-10 leading-[1.3] py-3 px-2 text-gold-gradient drop-shadow-sm ${isEn ? "font-couple text-7xl sm:text-9xl md:text-[10rem]" : "font-sinhala font-bold text-5xl sm:text-6xl md:text-7xl"}`}
         >
           {isEn ? wedding.bride.en : wedding.bride.si}
         </motion.h1>
@@ -82,7 +83,7 @@ export const Hero = ({ onOpenInvitation, opened }: Props) => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.5 }}
-          className="relative z-10 font-display text-2xl md:text-4xl my-2 text-primary tracking-widest drop-shadow-sm"
+          className="relative z-10 font-display text-3xl md:text-5xl my-2 text-primary tracking-widest drop-shadow-sm"
         >
           &
         </motion.div>
@@ -92,18 +93,19 @@ export const Hero = ({ onOpenInvitation, opened }: Props) => {
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 1, delay: 0.4 }}
-          className={`relative z-10 leading-[1.3] py-3 px-2 text-gold-gradient drop-shadow-sm ${isEn ? "font-couple text-7xl sm:text-8xl md:text-9xl" : "font-sinhala font-bold text-5xl sm:text-6xl md:text-7xl"}`}
+          // Increased En size: text-8xl sm:text-9xl md:text-[10rem]
+          className={`relative z-10 leading-[1.3] py-3 px-2 text-gold-gradient drop-shadow-sm ${isEn ? "font-couple text-7xl sm:text-9xl md:text-[10rem]" : "font-sinhala font-bold text-5xl sm:text-6xl md:text-7xl"}`}
         >
           {isEn ? wedding.groom.en : wedding.groom.si}
         </motion.h1>
 
-        {/* 2. SVG එක ඉවත් කර ඒ වෙනුවට swam.png පින්තූරය එක් කිරීම */}
+        {/* Swan Image */}
         <motion.div 
           initial={{ opacity: 0, scale: 0.8, y: 10 }}
           animate={{ 
             opacity: 1, 
             scale: 1, 
-            y: [0, -6, 0] // Subtle floating effect
+            y: [0, -6, 0] 
           }}
           transition={{ 
             opacity: { duration: 1, delay: 0.7 },
@@ -124,7 +126,8 @@ export const Hero = ({ onOpenInvitation, opened }: Props) => {
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 1.0 }}
-          className={`relative z-10 uppercase text-foreground/85 font-semibold mt-2 ${isEn ? "font-display tracking-[0.2em] text-xs md:text-sm" : "font-sinhala tracking-widest text-sm md:text-base"}`}
+          // Increased En size: text-sm md:text-lg (was text-xs md:text-sm)
+          className={`relative z-10 uppercase text-foreground/85 font-semibold mt-2 ${isEn ? "font-display tracking-[0.2em] text-sm md:text-lg" : "font-sinhala tracking-widest text-sm md:text-base"}`}
         >
           {dateStr}
         </motion.p>
@@ -134,7 +137,8 @@ export const Hero = ({ onOpenInvitation, opened }: Props) => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 1.2 }}
-          className={`relative z-10 mt-3 px-4 text-muted-foreground ${isEn ? "font-serif italic text-sm md:text-lg" : "font-sinhala text-sm md:text-base"}`}
+          // Increased En size: text-base md:text-xl (was text-sm md:text-lg)
+          className={`relative z-10 mt-3 px-4 text-muted-foreground ${isEn ? "font-serif italic text-base md:text-xl" : "font-sinhala text-sm md:text-base"}`}
         >
           {venueStr} <span className="mx-2 text-primary">✦</span> {addressStr}
         </motion.p>
@@ -152,7 +156,8 @@ export const Hero = ({ onOpenInvitation, opened }: Props) => {
             <motion.div
               animate={{ opacity: [0.6, 1, 0.6] }}
               transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-              className={`text-primary font-semibold uppercase mb-1 ${isEn ? "font-display text-[10px] md:text-xs tracking-[0.2em]" : "font-sinhala text-xs md:text-sm tracking-widest"}`}
+              // Increased En size: text-xs md:text-sm (was text-[10px] md:text-xs)
+              className={`text-primary font-semibold uppercase mb-1 ${isEn ? "font-display text-xs md:text-sm tracking-[0.2em]" : "font-sinhala text-xs md:text-sm tracking-widest"}`}
             >
               {isEn ? "Swipe to Explore" : "පහළට යන්න"}
             </motion.div>

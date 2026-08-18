@@ -30,7 +30,7 @@ export const Countdown = () => {
   // භාෂාවට අනුව වචන වෙනස් වීම
   const labels = isEn
     ? { d: "Days", h: "Hours", m: "Minutes", s: "Seconds", title: "Counting Down to Forever" }
-    : { d: "දින", h: "පැය", m: "මිනිත්තු", s: "තත්පර", title: "සදාකාලයට ගණන් කරමින්" };
+    : { d: "දින", h: "පැය", m: "මිනිත්තු", s: "තත්පර", title: "සදාකාලික ආදරයක ඇරඹුමට..." };
 
   const items = [
     { v: t.days, l: labels.d },
