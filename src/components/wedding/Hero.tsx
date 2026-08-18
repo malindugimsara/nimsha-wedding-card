@@ -2,82 +2,129 @@ import { motion } from "framer-motion";
 import { useWedding } from "@/lib/wedding-context";
 import { wedding } from "@/lib/wedding";
 import { Ornament, Sparkles } from "./Decorations";
-import heroFloral from "@/assets/hero-floral.jpg";
+import heroFloral from "@/assets/hero-floral.png";
+import swanImg from "@/assets/swam.webp"; 
+import { LotusDivider } from "./Ornaments";
 
-interface Props { onOpenInvitation: () => void; opened: boolean; }
+interface Props { 
+  onOpenInvitation: () => void; 
+  opened: boolean; 
+}
 
 export const Hero = ({ onOpenInvitation, opened }: Props) => {
-  const { lang, guestName } = useWedding();
-  const dateStr = wedding.date.toLocaleDateString("en-US", {
-    weekday: "long", month: "long", day: "numeric", year: "numeric",
-  });
+  const { lang } = useWedding();
+  const isEn = lang === "en";
+  
+  const dateStr = isEn ? wedding.ceremony.date : wedding.ceremony.dateSi;
+  const venueStr = isEn ? wedding.ceremony.venue : wedding.ceremony.venueSi;
+  const addressStr = isEn ? wedding.ceremony.address : wedding.ceremony.addressSi;
 
   return (
     <section id="home" className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden bg-gradient-soft">
-      {/* Background floral */}
+      
+      {/* Background floral with soft pink/ivory overlay */}
       <div className="absolute inset-0">
         <img
           src={heroFloral}
           alt=""
-          className="w-full h-full object-cover opacity-40 dark:opacity-25"
+          // dark:mix-blend-screen හෝ dark:mix-blend-soft-light භාවිතා කරන්න
+          className="w-full h-full object-cover opacity-80 dark:opacity-40 mix-blend-multiply dark:mix-blend-screen"
           width={1536}
           height={1920}
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-background/60 via-background/30 to-background" />
+        <div className="absolute inset-0 bg-gradient-to-b from-background/70 via-background/40 to-background/90" />
       </div>
-      <Sparkles count={10} />
+
+      <Sparkles count={15} />
+
+      {/* Floating Lotus Petals Animation for traditional theme */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+        {[...Array(5)].map((_, i) => (
+          <motion.div
+            key={`petal-${i}`}
+            className="absolute text-rose-300/40 text-lg md:text-xl"
+            initial={{ top: "-10%", left: `${20 * i + Math.random() * 10}%` }}
+            animate={{ top: "110%", rotate: [0, 180, 360], x: [0, 30, -30, 0] }}
+            transition={{ duration: 15 + Math.random() * 10, repeat: Infinity, ease: "linear" }}
+          >
+            ✿
+          </motion.div>
+        ))}
+      </div>
 
       {/* Main Content Container */}
-      <div className="relative container z-[50] text-center px-4 sm:px-6 flex flex-col items-center justify-center py-20">
+      <div className="relative container z-[50] text-center px-4 flex flex-col items-center justify-center py-16">
       
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          className="relative z-10 font-front font-display text-[10px] md:text-sm tracking-[0.3em] md:tracking-[0.4em] uppercase text-primary-deep mb-6"
+          className={`relative z-10 font-front uppercase text-primary-deep mb-6 mt-10 ${isEn ? "font-display text-[10px] md:text-sm tracking-[0.3em]" : "font-sinhala text-sm md:text-base tracking-widest font-semibold"}`}
         >
-          {lang === "en" ? "You are warmly invited" : "ඔබට ආදරයෙන් ආරාධනා කරමි"}
+          {isEn ? "You are warmly invited" : "ඔබට ආදරයෙන් ආරාධනා කරමි"}
         </motion.p>
 
-        <Ornament className="relative z-10 text-primary w-40 md:w-64 mx-auto mb-6" />
+        {/* Top Ornament */}
+        <LotusDivider  width="w-20 sm:w-28" />
+        <Ornament className="relative z-10 text-primary/70 w-32 md:w-48 mx-auto mb-4" />
 
-        {/* Bride Name - FIXED: Changed leading-[0.9] to leading-[1.2] and added py-4 px-2 */}
+        {/* Bride Name */}
         <motion.h1
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 1, delay: 0.3 }}
-          className="relative z-10 font-couple text-6xl min-[375px]:text-7xl sm:text-8xl md:text-9xl lg:text-[10rem] leading-[1.2] py-4 px-2 text-gold-gradient animate-heartbeat"
+          transition={{ duration: 1, delay: 0.2 }}
+          className={`relative z-10 leading-[1.3] py-3 px-2 text-gold-gradient drop-shadow-sm ${isEn ? "font-couple text-7xl sm:text-8xl md:text-9xl" : "font-sinhala font-bold text-5xl sm:text-6xl md:text-7xl"}`}
         >
-          {lang === "en" ? wedding.bride.en : wedding.bride.si}
+          {isEn ? wedding.bride.en : wedding.bride.si}
         </motion.h1>
 
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 0.6 }}
-          className="relative z-10 font-display text-xl md:text-3xl my-2 text-primary tracking-widest"
+          transition={{ delay: 0.5 }}
+          className="relative z-10 font-display text-2xl md:text-4xl my-2 text-primary tracking-widest drop-shadow-sm"
         >
           &
         </motion.div>
 
-        {/* Groom Name - FIXED: Changed leading-[0.9] to leading-[1.2] and added py-4 px-2 */}
+        {/* Groom Name */}
         <motion.h1
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 1, delay: 0.5 }}
-          className="relative z-10 font-couple text-6xl min-[375px]:text-7xl sm:text-8xl md:text-9xl lg:text-[10rem] leading-[1.2] py-4 px-2 text-gold-gradient animate-heartbeat"
+          transition={{ duration: 1, delay: 0.4 }}
+          className={`relative z-10 leading-[1.3] py-3 px-2 text-gold-gradient drop-shadow-sm ${isEn ? "font-couple text-7xl sm:text-8xl md:text-9xl" : "font-sinhala font-bold text-5xl sm:text-6xl md:text-7xl"}`}
         >
-          {lang === "en" ? wedding.groom.en : wedding.groom.si}
+          {isEn ? wedding.groom.en : wedding.groom.si}
         </motion.h1>
 
-        <Ornament className="relative z-10 text-primary w-40 md:w-64 mx-auto mt-8 mb-6" />
+        {/* 2. SVG එක ඉවත් කර ඒ වෙනුවට swam.png පින්තූරය එක් කිරීම */}
+        <motion.div 
+          initial={{ opacity: 0, scale: 0.8, y: 10 }}
+          animate={{ 
+            opacity: 1, 
+            scale: 1, 
+            y: [0, -6, 0] // Subtle floating effect
+          }}
+          transition={{ 
+            opacity: { duration: 1, delay: 0.7 },
+            scale: { duration: 1, delay: 0.7 },
+            y: { duration: 4, repeat: Infinity, ease: "easeInOut", delay: 1.5 } 
+          }}
+          className="relative z-10 my-6"
+        >
+          <img 
+            src={swanImg} 
+            alt="Swans with Lotus" 
+            className="w-56 md:w-72 lg:w-80 object-contain drop-shadow-xl mx-auto"
+          />
+        </motion.div>
 
-        {/* Date */}
+        {/* Translated Date */}
         <motion.p
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.9 }}
-          className="relative z-10 font-display tracking-[0.2em] md:tracking-[0.25em] text-xs md:text-base text-foreground/80 uppercase"
+          transition={{ delay: 1.0 }}
+          className={`relative z-10 uppercase text-foreground/85 font-semibold mt-2 ${isEn ? "font-display tracking-[0.2em] text-xs md:text-sm" : "font-sinhala tracking-widest text-sm md:text-base"}`}
         >
           {dateStr}
         </motion.p>
@@ -86,37 +133,37 @@ export const Hero = ({ onOpenInvitation, opened }: Props) => {
         <motion.p
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 1 }}
-          className="relative z-10 font-serif italic text-sm md:text-lg text-muted-foreground mt-2 px-4"
+          transition={{ delay: 1.2 }}
+          className={`relative z-10 mt-3 px-4 text-muted-foreground ${isEn ? "font-serif italic text-sm md:text-lg" : "font-sinhala text-sm md:text-base"}`}
         >
-          {wedding.ceremony.venue} · {wedding.ceremony.address}
+          {venueStr} <span className="mx-2 text-primary">✦</span> {addressStr}
         </motion.p>
 
-        {/* Swipe/Scroll Hint */}
+        {/* Swipe/Scroll Hint Button */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 1.4, duration: 1 }}
+          transition={{ delay: 1.6, duration: 1 }}
           onClick={() => window.scrollTo({ top: window.innerHeight, behavior: "smooth" })}
-          className="relative mt-10 cursor-pointer z-20"
+          className="relative mt-12 cursor-pointer z-20"
         >
-          <div className="flex flex-col items-center px-6 py-2.5 rounded-[2rem] bg-background/40 backdrop-blur-md border border-primary/20 shadow-[0_4px_20px_rgba(0,0,0,0.1)] active:scale-95 transition-transform whitespace-nowrap">
+          <div className="flex flex-col items-center px-8 py-3 rounded-[2rem] bg-white/40 backdrop-blur-md border border-primary/20 shadow-[0_4px_20px_rgba(212,175,55,0.15)] active:scale-95 transition-transform whitespace-nowrap touch-manipulation">
             
             <motion.div
               animate={{ opacity: [0.6, 1, 0.6] }}
               transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-              className="text-primary text-[10px] md:text-xs font-display tracking-[0.2em] md:tracking-[0.3em] uppercase mb-0.5"
+              className={`text-primary font-semibold uppercase mb-1 ${isEn ? "font-display text-[10px] md:text-xs tracking-[0.2em]" : "font-sinhala text-xs md:text-sm tracking-widest"}`}
             >
-              {lang === "en" ? "Swipe to Explore" : "පහළට යන්න"}
+              {isEn ? "Swipe to Explore" : "පහළට යන්න"}
             </motion.div>
 
             {/* Double Animated Chevrons */}
-            <div className="flex flex-col items-center -space-y-3.5 mt-0.5">
+            <div className="flex flex-col items-center -space-y-3.5 mt-1">
               <motion.div
                 animate={{ y: [0, 5, 0], opacity: [0.2, 1, 0.2] }}
                 transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut", delay: 0 }}
               >
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-primary drop-shadow-[0_2px_4px_rgba(217,119,6,0.4)]">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="text-primary drop-shadow-[0_2px_4px_rgba(217,119,6,0.3)]">
                   <polyline points="6 9 12 15 18 9"></polyline>
                 </svg>
               </motion.div>
@@ -124,7 +171,7 @@ export const Hero = ({ onOpenInvitation, opened }: Props) => {
                 animate={{ y: [0, 5, 0], opacity: [0.2, 1, 0.2] }}
                 transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut", delay: 0.2 }}
               >
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-primary drop-shadow-[0_2px_4px_rgba(217,119,6,0.4)]">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="text-primary drop-shadow-[0_2px_4px_rgba(217,119,6,0.3)]">
                   <polyline points="6 9 12 15 18 9"></polyline>
                 </svg>
               </motion.div>
