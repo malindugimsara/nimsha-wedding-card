@@ -1,8 +1,6 @@
-import { useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { EffectCoverflow, Autoplay, Pagination, Navigation } from "swiper/modules";
-import { motion, AnimatePresence } from "framer-motion";
-import { HiX } from "react-icons/hi";
+import { motion } from "framer-motion";
 import { useWedding } from "@/lib/wedding-context";
 import { Ornament } from "./Decorations";
 import { LotusDivider } from "./Ornaments";
@@ -24,7 +22,6 @@ const images = [g1, g2, g3, g4, g5, g6, g7];
 export const Gallery = () => {
   const { lang } = useWedding();
   const isEn = lang === "en";
-  const [lightbox, setLightbox] = useState<string | null>(null);
 
   return (
     <section id="gallery" className="relative py-16 lg:py-24 bg-gradient-soft overflow-hidden font-sans">
@@ -75,8 +72,7 @@ export const Gallery = () => {
         >
           {images.map((src, i) => (
             <SwiperSlide key={i} className="!w-[280px] sm:!w-[360px] md:!w-[420px]">
-              <button
-                onClick={() => setLightbox(src)}
+              <div
                 // Traditional Photo Frame Look (White background padding with thin gold border)
                 className="block w-full aspect-[3/4] overflow-hidden rounded-2xl bg-white dark:bg-black/50 p-2 md:p-3 border border-rose-200/50 dark:border-primary/20 shadow-elegant group relative"
               >
@@ -91,62 +87,11 @@ export const Gallery = () => {
                      <span className="font-script text-3xl text-white drop-shadow-md">✦</span>
                   </div>
                 </div>
-              </button>
+              </div>
             </SwiperSlide>
           ))}
         </Swiper>
       </div>
-
-      {/* Lightbox / Fullscreen Image Viewer */}
-      <AnimatePresence>
-        {lightbox && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[110] bg-white/95 dark:bg-black/95 backdrop-blur-xl grid place-items-center p-4 md:p-8"
-            onClick={() => setLightbox(null)}
-          >
-            {/* Close Button */}
-            <button
-              className="absolute top-6 right-6 w-12 h-12 grid place-items-center rounded-full bg-rose-50/50 dark:bg-white/10 border border-primary/30 text-primary-deep hover:bg-primary/20 transition-colors z-10"
-              onClick={() => setLightbox(null)}
-              aria-label="Close"
-            >
-              <HiX className="w-6 h-6" />
-            </button>
-            
-            <motion.div
-              initial={{ scale: 0.9, opacity: 0, y: 20 }}
-              animate={{ scale: 1, opacity: 1, y: 0 }}
-              exit={{ scale: 0.9, opacity: 0, y: 20 }}
-              className="relative bg-white dark:bg-card p-3 md:p-4 rounded-3xl shadow-2xl border border-rose-200 dark:border-primary/20 max-h-[90vh]"
-              onClick={(e) => e.stopPropagation()}
-            >
-              {/* Lotus Corners for the Lightbox Image Frame */}
-              <LotusCorner className="absolute top-4 left-4 w-10 text-primary/40 z-10 drop-shadow-sm pointer-events-none" />
-              <LotusCorner className="absolute top-4 right-4 w-10 text-primary/40 scale-x-[-1] z-10 drop-shadow-sm pointer-events-none" />
-              <LotusCorner className="absolute bottom-4 left-4 w-10 text-primary/40 scale-y-[-1] z-10 drop-shadow-sm pointer-events-none" />
-              <LotusCorner className="absolute bottom-4 right-4 w-10 text-primary/40 scale-x-[-1] scale-y-[-1] z-10 drop-shadow-sm pointer-events-none" />
-
-              <img
-                src={lightbox}
-                alt="Enlarged wedding moment"
-                className="max-h-[80vh] max-w-[90vw] md:max-w-[75vw] rounded-2xl object-contain"
-              />
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
     </section>
   );
 };
-
-// Small Lotus Corner SVG for Lightbox Frame
-const LotusCorner = ({ className = "" }: { className?: string }) => (
-  <svg viewBox="0 0 100 100" className={className} fill="currentColor" aria-hidden>
-    <path d="M5 5 Q 30 15 45 45 Q 60 75 95 95" fill="none" stroke="currentColor" strokeWidth="2" opacity="0.6"/>
-    <path d="M5 5 Q 10 30 45 45" />
-    <path d="M25 25 Q 35 30 45 45" />
-  </svg>
-);
