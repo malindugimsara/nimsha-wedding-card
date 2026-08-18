@@ -3,6 +3,8 @@ import { HiVolumeUp, HiVolumeOff } from "react-icons/hi";
 
 const TRACK = "/bgmusic1.mp3";
 
+
+
 // Create the audio instance outside the component (if in browser).
 // මේකෙන් site එක load වෙච්ච ගමන්ම music එකත් download වෙන්න පටන් ගන්නවා.
 let globalAudio: HTMLAudioElement | null = null;
@@ -11,6 +13,7 @@ if (typeof window !== "undefined") {
   globalAudio.preload = "auto";
   globalAudio.loop = true;
   globalAudio.volume = 0.45;
+  globalAudio.playbackRate = 0.7;
 }
 
 interface Props {
