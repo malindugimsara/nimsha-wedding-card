@@ -15,18 +15,20 @@ export const EventDetails = () => {
   return (
     <section id="events" className="relative lg:py-24 py-16 bg-[#faf8f5] dark:bg-stone-950 overflow-hidden min-h-screen flex items-center justify-center transition-colors duration-500">
       
-      {/* Background texture */}
-      <div className="absolute inset-0 z-0">
+      {/* Background texture (iOS OPTIMIZED: Removed mix-blend-multiply) */}
+      <div className="absolute inset-0 z-0 bg-transparent">
         <img
           src={heroFloral}
           alt=""
-          className="w-full h-full object-cover opacity-10 dark:opacity-5 mix-blend-multiply dark:mix-blend-screen transition-opacity duration-500"
+          loading="lazy"
+          // Removed mix-blend modes to prevent scroll lag on Safari
+          className="w-full h-full object-cover opacity-10 dark:opacity-5 transition-opacity duration-500"
         />
       </div>
 
-      {/* Soft Ambient Glows */}
-      <div className="absolute top-0 left-0 w-[500px] h-[500px] bg-[#cda052]/10 dark:bg-[#cda052]/5 rounded-full blur-[100px] -translate-x-1/2 -translate-y-1/2 pointer-events-none transition-colors duration-500 z-0"></div>
-      <div className="absolute bottom-0 right-0 w-[600px] h-[600px] bg-rose-300/10 dark:bg-rose-900/10 rounded-full blur-[120px] translate-x-1/3 translate-y-1/3 pointer-events-none transition-colors duration-500 z-0"></div>
+      {/* Soft Ambient Glows (iOS OPTIMIZED: Added transform-gpu to heavy blurs) */}
+      <div className="absolute top-0 left-0 w-[500px] h-[500px] bg-[#cda052]/10 dark:bg-[#cda052]/5 rounded-full blur-[100px] -translate-x-1/2 -translate-y-1/2 pointer-events-none transition-colors duration-500 z-0 transform-gpu will-change-transform [backface-visibility:hidden]"></div>
+      <div className="absolute bottom-0 right-0 w-[600px] h-[600px] bg-rose-300/10 dark:bg-rose-900/10 rounded-full blur-[120px] translate-x-1/3 translate-y-1/3 pointer-events-none transition-colors duration-500 z-0 transform-gpu will-change-transform [backface-visibility:hidden]"></div>
 
       <div className="container max-w-5xl relative z-10 flex justify-center px-4">
         {events.map((ev, i) => {
@@ -43,9 +45,10 @@ export const EventDetails = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.8 }}
-              className="relative w-full max-w-lg"
+              // Added transform-gpu to ensure scroll-triggered animation is smooth
+              className="relative w-full max-w-lg transform-gpu"
             >
-              {/* --- COMPACT MATTE CARD (Now slightly transparent) --- */}
+              {/* --- COMPACT MATTE CARD --- */}
               <div className="bg-[#fdfbf7]/90 dark:bg-[#1c1917]/90 backdrop-blur-md rounded-t-[8rem] md:rounded-t-[9rem] rounded-b-[2rem] p-6 pt-10 md:p-10 md:pt-12 text-center shadow-[0_20px_60px_-15px_rgba(205,160,82,0.15)] dark:shadow-[0_20px_60px_-15px_rgba(0,0,0,0.8)] relative overflow-hidden flex flex-col items-center transition-colors duration-500">
                 
                 {/* Center Watermark */}
@@ -95,12 +98,11 @@ export const EventDetails = () => {
                      {isEn ? "Coordinator" : "සම්බන්ධීකාරක"}
                    </div>
                    
-                   {/* CHANGED: Converted to an <a> tag with 'tel:' link and added hover animations */}
                    <a 
                      href={`tel:${wedding.contact.phone}`}
+                     aria-label="Call Coordinator"
                      className="group flex flex-col sm:flex-row items-center gap-3 sm:gap-4 p-2 -m-2 rounded-xl transition-all duration-300 hover:scale-105 active:scale-95 cursor-pointer"
                    >
-                     {/* Added group-hover border/shadow to the icon circle */}
                      <div className="flex items-center justify-center w-7 h-7 shrink-0 rounded-full bg-white dark:bg-stone-900 border border-[#e5d8c5] dark:border-stone-700 shadow-sm transition-all duration-300 group-hover:border-[#cda052] group-hover:shadow-md">
                        <FaPhone className="text-[#cda052] w-3 h-3 group-hover:animate-pulse" />
                      </div>
@@ -117,7 +119,16 @@ export const EventDetails = () => {
                    </a>
                 </div>
 
-               
+                {/* CLOSING MESSAGE & BOTTOM FLOURISH */}
+                <div className="mt-8 pt-6 border-t border-[#e5d8c5]/60 dark:border-stone-800 w-full flex flex-col items-center relative z-10 transition-colors duration-500">
+                   <p className={`text-[#7a746e] dark:text-stone-400 italic text-center max-w-[260px] mb-4 ${isEn ? "font-serif text-[14px] leading-relaxed" : "font-sinhala text-[12px] leading-relaxed"}`}>
+                     {isEn 
+                       ? "We joyfully await to share this beautiful beginning with you." 
+                       : "අපගේ ජීවිතයේ මෙම සුවිශේෂී දිනය ඔබ සමඟ බෙදා ගැනීමට අපි සතුටින් බලාපොරොත්තු වෙමු."}
+                   </p>
+                   <BottomFlourish className="w-12 h-auto text-[#cda052]/70 dark:text-[#d4af37]/70" />
+                </div>
+
               </div>
             </motion.div>
           );

@@ -30,7 +30,6 @@ export const Countdown = () => {
     return () => clearInterval(id);
   }, []);
 
-  // භාෂාවට අනුව වචන වෙනස් වීම
   const labels = isEn
     ? { d: "Days", h: "Hours", m: "Minutes", s: "Seconds", title: "Counting Down to Forever" }
     : { d: "දින", h: "පැය", m: "මිනිත්තු", s: "තත්පර", title: "සදාකාලික ආදරයක ඇරඹුමට..." };
@@ -42,26 +41,27 @@ export const Countdown = () => {
     { v: t.seconds, l: labels.s },
   ];
 
-  // භාෂාවට අනුව දිනය ලබාගැනීම
   const dateStr = isEn ? wedding.ceremony.date : wedding.ceremony.dateSi;
 
   return (
     <section className="relative py-20 lg:py-24 bg-gradient-soft overflow-hidden font-sans">
       
-      {/* Background Water Ripples for Theme Continuity */}
+      {/* Background Water Ripples */}
       <div className="absolute inset-0 pointer-events-none opacity-30 dark:opacity-10 z-0">
         <div className="absolute top-[-10%] left-[-5%] w-[40rem] h-[40rem] border-[1px] border-primary/20 rounded-full" />
         <div className="absolute bottom-[-10%] right-[-5%] w-[30rem] h-[30rem] border-[1px] border-primary/30 rounded-full" />
       </div>
 
-      {/* --- CUTE COUPLE ART (Static Background) --- */}
-      <div className="absolute inset-0 pointer-events-none overflow-hidden z-0 flex items-center justify-center">
-        {/* Converted to a static div and positioned with translate-y-16 */}
-        <div className="relative w-[300px] md:w-[450px] opacity-35 dark:opacity-30 translate-y-16">
+      {/* --- CUTE COUPLE ART (Fixed for iOS) --- */}
+      {/* Added 'isolate' to force a new rendering layer, preventing iOS glitches */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden z-0 flex items-center justify-center isolate">
+        {/* Lowered opacity since we removed the blend mode */}
+        <div className="relative w-[300px] md:w-[450px] opacity-20 dark:opacity-15 translate-y-16">
           <img 
             src={coupleArt} 
             alt="Bride and Groom Background" 
-            className="w-full h-full object-contain mix-blend-multiply dark:mix-blend-screen"
+            // REMOVED mix-blend-multiply and mix-blend-screen for buttery smooth scrolling
+            className="w-full h-full object-contain"
           />
         </div>
       </div>
@@ -79,7 +79,7 @@ export const Countdown = () => {
           {dateStr}
         </p>
 
-        {/* Countdown Cards Grid (Highly Transparent) */}
+        {/* Countdown Cards */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 max-w-4xl mx-auto">
           {items.map((it, i) => (
             <motion.div
@@ -90,14 +90,11 @@ export const Countdown = () => {
               transition={{ delay: i * 0.1 }}
               className="relative glass-card bg-white/10 dark:bg-black/10 backdrop-blur-md rounded-[2rem] p-6 md:p-8 flex flex-col items-center justify-center border border-white/30 dark:border-white/10 shadow-sm overflow-hidden group hover:border-primary/40 transition-colors"
             >
-              {/* Card Hover Effect */}
               <div className="absolute inset-0 rounded-[2rem] bg-gold-gradient opacity-0 group-hover:opacity-10 transition-opacity" />
               
-              {/* Lotus Corners for each card */}
               <LotusCorner className="absolute top-3 left-3 w-8 text-primary/30" />
               <LotusCorner className="absolute bottom-3 right-3 w-8 text-primary/30 scale-x-[-1] scale-y-[-1]" />
 
-              {/* Number */}
               <motion.div
                 key={it.v}
                 initial={{ scale: 0.8, opacity: 0 }}
@@ -107,7 +104,6 @@ export const Countdown = () => {
                 {String(it.v).padStart(2, "0")}
               </motion.div>
               
-              {/* Label */}
               <div className={`mt-2 text-primary/90 uppercase ${isEn ? "font-display text-[10px] md:text-xs tracking-[0.3em]" : "font-sinhala font-bold text-xs md:text-sm tracking-widest"}`}>
                 {it.l}
               </div>
@@ -119,7 +115,6 @@ export const Countdown = () => {
   );
 };
 
-// Small Lotus Corner SVG for the Countdown Cards
 const LotusCorner = ({ className = "" }: { className?: string }) => (
   <svg viewBox="0 0 100 100" className={className} fill="currentColor" aria-hidden>
     <path d="M5 5 Q 30 15 45 45 Q 60 75 95 95" fill="none" stroke="currentColor" strokeWidth="2" opacity="0.5"/>

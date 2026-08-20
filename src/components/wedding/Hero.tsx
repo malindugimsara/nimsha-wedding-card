@@ -18,12 +18,14 @@ export const Hero = ({ onOpenInvitation, opened }: Props) => {
   return (
     <section id="home" className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden bg-gradient-soft">
       
-      {/* Background floral with soft pink/ivory overlay */}
-      <div className="absolute inset-0">
+      {/* Background floral (iOS OPTIMIZED: Removed mix-blend modes) */}
+      <div className="absolute inset-0 bg-transparent">
         <img
           src={heroFloral}
           alt=""
-          className="w-full h-full object-cover opacity-100 dark:opacity-40 mix-blend-multiply dark:mix-blend-screen"
+          loading="lazy"
+          // Removed mix-blend-multiply/screen. Adjusted opacity slightly to compensate.
+          className="w-full h-full object-cover opacity-60 dark:opacity-20"
           width={1536}
           height={1920}
         />
@@ -32,12 +34,13 @@ export const Hero = ({ onOpenInvitation, opened }: Props) => {
 
       <Sparkles count={19} />
 
-      {/* Floating Lotus Petals Animation for traditional theme */}
-      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+      {/* Floating Lotus Petals (iOS OPTIMIZED: Added GPU hardware acceleration) */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden isolate">
         {[...Array(5)].map((_, i) => (
           <motion.div
             key={`petal-${i}`}
-            className="absolute text-rose-300/40 text-lg md:text-xl"
+            // Added transform-gpu to offload continuous animation to the iPhone graphics chip
+            className="absolute text-rose-300/40 text-lg md:text-xl transform-gpu will-change-transform [backface-visibility:hidden]"
             initial={{ top: "-10%", left: `${20 * i + Math.random() * 10}%` }}
             animate={{ top: "110%", rotate: [0, 180, 360], x: [0, 30, -30, 0] }}
             transition={{ duration: 15 + Math.random() * 10, repeat: Infinity, ease: "linear" }}
@@ -92,7 +95,7 @@ export const Hero = ({ onOpenInvitation, opened }: Props) => {
           {isEn ? wedding.groom.en : wedding.groom.si}
         </motion.h1>
 
-        {/* Swan Image */}
+        {/* Swan Image (iOS OPTIMIZED: Added hardware acceleration for continuous bobbing) */}
         <motion.div 
           initial={{ opacity: 0, scale: 0.8, y: 10 }}
           animate={{ 
@@ -105,7 +108,8 @@ export const Hero = ({ onOpenInvitation, opened }: Props) => {
             scale: { duration: 1, delay: 0.7 },
             y: { duration: 4, repeat: Infinity, ease: "easeInOut", delay: 1.5 } 
           }}
-          className="relative z-10 my-6"
+          // transform-gpu prevents lag during continuous y-axis animations
+          className="relative z-10 my-6 transform-gpu will-change-transform [backface-visibility:hidden]"
         >
           <img 
             src={swanImg} 
@@ -114,7 +118,7 @@ export const Hero = ({ onOpenInvitation, opened }: Props) => {
           />
         </motion.div>
 
-        {/* --- NEW ROMANTIC QUOTE (Replaces Date & Location) --- */}
+        {/* ROMANTIC QUOTE */}
         <motion.div
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
@@ -127,7 +131,6 @@ export const Hero = ({ onOpenInvitation, opened }: Props) => {
               : '"එකම සිතුවිල්ලකින් බැඳුණු ආත්ම දෙකක්, එකම රිද්මයකට ගැහෙන හදවත් දෙකක්."'}
           </p>
         </motion.div>
-        {/* ---------------------------------------------------- */}
 
         {/* Swipe/Scroll Hint Button */}
         <motion.div
@@ -142,7 +145,7 @@ export const Hero = ({ onOpenInvitation, opened }: Props) => {
             <motion.div
               animate={{ opacity: [0.6, 1, 0.6] }}
               transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-              className={`text-primary font-semibold uppercase mb-1 ${isEn ? "font-display text-xs md:text-sm tracking-[0.2em]" : "font-sinhala text-xs md:text-sm tracking-widest"}`}
+              className={`text-primary font-semibold uppercase mb-1 transform-gpu ${isEn ? "font-display text-xs md:text-sm tracking-[0.2em]" : "font-sinhala text-xs md:text-sm tracking-widest"}`}
             >
               {isEn ? "Swipe to Explore" : "පහළට යන්න"}
             </motion.div>
@@ -152,6 +155,7 @@ export const Hero = ({ onOpenInvitation, opened }: Props) => {
               <motion.div
                 animate={{ y: [0, 5, 0], opacity: [0.2, 1, 0.2] }}
                 transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut", delay: 0 }}
+                className="transform-gpu will-change-transform"
               >
                 <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="text-primary drop-shadow-[0_2px_4px_rgba(217,119,6,0.3)]">
                   <polyline points="6 9 12 15 18 9"></polyline>
@@ -160,6 +164,7 @@ export const Hero = ({ onOpenInvitation, opened }: Props) => {
               <motion.div
                 animate={{ y: [0, 5, 0], opacity: [0.2, 1, 0.2] }}
                 transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut", delay: 0.2 }}
+                className="transform-gpu will-change-transform"
               >
                 <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="text-primary drop-shadow-[0_2px_4px_rgba(217,119,6,0.3)]">
                   <polyline points="6 9 12 15 18 9"></polyline>
