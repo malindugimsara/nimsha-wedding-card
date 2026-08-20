@@ -4,8 +4,7 @@ import { wedding } from "@/lib/wedding";
 import { useWedding } from "@/lib/wedding-context";
 import { Ornament } from "./Decorations";
 
-// IMPORT YOUR IMAGE HERE:
-import cornerArt from "@/assets/footerImage.webp"; 
+// IMPORT YOUR IMAGE HERE: 
 
 export const Footer = () => {
   const { lang } = useWedding();
@@ -27,29 +26,6 @@ export const Footer = () => {
       </div>
 
       {/* --- iOS OPTIMIZED: BACKGROUND LAYER --- */}
-      {/* Added 'isolate' to stop mix-blend-mode from lagging the whole page on scroll */}
-      <div className="absolute inset-0 pointer-events-none z-0 isolate overflow-hidden">
-        
-        {/* Left Corner */}
-        <img 
-          src={cornerArt} 
-          alt="Corner Design"
-          // Added iOS hardware acceleration classes
-          className="absolute bottom-0 left-0 w-32 md:w-48 lg:w-56 opacity-40 dark:opacity-30 mix-blend-multiply dark:invert transform-gpu will-change-transform [backface-visibility:hidden]"
-        />
-        
-        {/* Right Corner */}
-        <img 
-          src={cornerArt} 
-          alt="Corner Design"
-          // Added iOS hardware acceleration classes
-          className="absolute bottom-0 right-0 w-32 md:w-48 lg:w-56 opacity-40 dark:opacity-30 mix-blend-multiply dark:invert scale-x-[-1] transform-gpu will-change-transform [backface-visibility:hidden]"
-        />
-
-        
-  
-      </div>
-      {/* ------------------------------------------- */}
 
       <div className="container text-center relative z-10">
         <Ornament className="text-primary w-40 md:w-48 mx-auto mb-6 opacity-80" />
