@@ -46,7 +46,7 @@ const IndexInner = () => {
             <InvitationCard />
             <Countdown />
             <EventDetails />
-            {/* <Gallery /> */}
+            <Gallery />
             <SaveTheDate />
             <RSVPForm />
             <Footer />

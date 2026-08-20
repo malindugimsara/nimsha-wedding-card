@@ -110,12 +110,45 @@
 
   html {
     scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
   }
 
   body {
     @apply bg-background text-foreground;
     font-family: 'Cormorant Garamond', serif;
     font-feature-settings: 'liga', 'kern';
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+
+  @supports (-webkit-touch-callout: none) {
+    .glass-card,
+    [class*="backdrop-blur"],
+    .backdrop-blur-sm,
+    .backdrop-blur-md,
+    .backdrop-blur-xl {
+      -webkit-backdrop-filter: none !important;
+      backdrop-filter: none !important;
+    }
+
+    .animate-float-petal,
+    .animate-sparkle,
+    .animate-heartbeat,
+    .animate-fade-up {
+      animation-duration: 20s !important;
+    }
   }
 }
 

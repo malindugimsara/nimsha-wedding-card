@@ -1,15 +1,27 @@
 import { motion } from "framer-motion";
 
+const isIOS = typeof navigator !== "undefined" && /iPhone|iPad|iPod/i.test(navigator.userAgent);
+const prefersReducedMotion =
+  typeof window !== "undefined" &&
+  typeof window.matchMedia === "function" &&
+  window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+const reduceDecorations = isIOS || prefersReducedMotion;
+
 // Floating petals/sparkles overlay — purely decorative
 export const FloatingPetals = ({ count = 14 }: { count?: number }) => {
-  const petals = Array.from({ length: count });
+  const petals = Array.from({ length: reduceDecorations ? Math.min(count, 4) : count });
+
+  if (reduceDecorations && count <= 0) {
+    return null;
+  }
+
   return (
     <div className="pointer-events-none fixed inset-0 z-10 overflow-hidden" aria-hidden>
       {petals.map((_, i) => {
         const left = Math.random() * 100;
-        const duration = 12 + Math.random() * 14;
-        const delay = Math.random() * 10;
-        const size = 8 + Math.random() * 12;
+        const duration = reduceDecorations ? 18 + Math.random() * 8 : 12 + Math.random() * 14;
+        const delay = reduceDecorations ? Math.random() * 4 : Math.random() * 10;
+        const size = reduceDecorations ? 8 + Math.random() * 8 : 8 + Math.random() * 12;
         return (
           <span
             key={i}
@@ -36,26 +48,30 @@ export const FloatingPetals = ({ count = 14 }: { count?: number }) => {
   );
 };
 
-export const Sparkles = ({ count = 6 }: { count?: number }) => (
-  <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden>
-    {Array.from({ length: count }).map((_, i) => (
-      <motion.span
-        key={i}
-        className="absolute"
-        style={{
-          left: `${Math.random() * 100}%`,
-          top: `${Math.random() * 100}%`,
-        }}
-        animate={{ opacity: [0, 1, 0], scale: [0.4, 1.2, 0.4] }}
-        transition={{ duration: 2 + Math.random() * 2, repeat: Infinity, delay: Math.random() * 3 }}
-      >
-        <svg width="14" height="14" viewBox="0 0 14 14">
-          <path d="M7 0 L8 6 L14 7 L8 8 L7 14 L6 8 L0 7 L6 6 Z" fill="hsl(var(--primary))" />
-        </svg>
-      </motion.span>
-    ))}
-  </div>
-);
+export const Sparkles = ({ count = 6 }: { count?: number }) => {
+  const sparkleCount = reduceDecorations ? Math.min(count, 6) : count;
+
+  return (
+    <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden>
+      {Array.from({ length: sparkleCount }).map((_, i) => (
+        <motion.span
+          key={i}
+          className="absolute"
+          style={{
+            left: `${Math.random() * 100}%`,
+            top: `${Math.random() * 100}%`,
+          }}
+          animate={reduceDecorations ? { opacity: [0.2, 0.8, 0.2], scale: [0.7, 1, 0.7] } : { opacity: [0, 1, 0], scale: [0.4, 1.2, 0.4] }}
+          transition={{ duration: reduceDecorations ? 3 + Math.random() * 2 : 2 + Math.random() * 2, repeat: Infinity, delay: Math.random() * 3 }}
+        >
+          <svg width="14" height="14" viewBox="0 0 14 14">
+            <path d="M7 0 L8 6 L14 7 L8 8 L7 14 L6 8 L0 7 L6 6 Z" fill="hsl(var(--primary))" />
+          </svg>
+        </motion.span>
+      ))}
+    </div>
+  );
+};
 
 export const Ornament = ({ className = "" }: { className?: string }) => (
   <svg viewBox="0 0 200 30" className={className} aria-hidden>

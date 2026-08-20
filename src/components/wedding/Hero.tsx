@@ -14,10 +14,18 @@ interface Props {
 export const Hero = ({ onOpenInvitation, opened }: Props) => {
   const { lang } = useWedding();
   const isEn = lang === "en";
-  
+  const isIOS = typeof navigator !== "undefined" && /iPhone|iPad|iPod/i.test(navigator.userAgent);
+  const prefersReducedMotion =
+    typeof window !== "undefined" &&
+    typeof window.matchMedia === "function" &&
+    window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const reduceMotion = isIOS || prefersReducedMotion;
+  const petalCount = reduceMotion ? 3 : 5;
+  const sparklesCount = reduceMotion ? 10 : 19;
+
   return (
     <section id="home" className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden bg-gradient-soft">
-      
+
       {/* Background floral (iOS OPTIMIZED: Removed mix-blend modes) */}
       <div className="absolute inset-0 bg-transparent">
         <img
@@ -32,18 +40,17 @@ export const Hero = ({ onOpenInvitation, opened }: Props) => {
         <div className="absolute inset-0 bg-gradient-to-b from-background/70 via-background/40 to-background/90" />
       </div>
 
-      <Sparkles count={19} />
+      <Sparkles count={sparklesCount} />
 
       {/* Floating Lotus Petals (iOS OPTIMIZED: Added GPU hardware acceleration) */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden isolate">
-        {[...Array(5)].map((_, i) => (
+        {[...Array(petalCount)].map((_, i) => (
           <motion.div
             key={`petal-${i}`}
-            // Added transform-gpu to offload continuous animation to the iPhone graphics chip
             className="absolute text-rose-300/40 text-lg md:text-xl transform-gpu will-change-transform [backface-visibility:hidden]"
             initial={{ top: "-10%", left: `${20 * i + Math.random() * 10}%` }}
-            animate={{ top: "110%", rotate: [0, 180, 360], x: [0, 30, -30, 0] }}
-            transition={{ duration: 15 + Math.random() * 10, repeat: Infinity, ease: "linear" }}
+            animate={reduceMotion ? { top: "60%", opacity: 0.35 } : { top: "110%", rotate: [0, 180, 360], x: [0, 30, -30, 0] }}
+            transition={reduceMotion ? { duration: 0.01 } : { duration: 15 + Math.random() * 10, repeat: Infinity, ease: "linear" }}
           >
             ✿
           </motion.div>
@@ -56,7 +63,7 @@ export const Hero = ({ onOpenInvitation, opened }: Props) => {
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
+          transition={{ duration: reduceMotion ? 0.01 : 0.8 }}
           className={`relative z-10 font-front uppercase text-primary-deep mb-6 mt-10 ${isEn ? "font-display text-xs md:text-base tracking-[0.3em]" : "font-sinhala text-sm md:text-base tracking-widest font-semibold"}`}
         >
           {isEn ? "You are warmly invited" : "ඔබට ආදරයෙන් ආරාධනා කරමි"}
@@ -70,7 +77,7 @@ export const Hero = ({ onOpenInvitation, opened }: Props) => {
         <motion.h1
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 1, delay: 0.2 }}
+          transition={{ duration: reduceMotion ? 0.01 : 1, delay: reduceMotion ? 0 : 0.2 }}
           className={`relative z-10 leading-[1.3] py-3 px-2 text-gold-gradient drop-shadow-sm ${isEn ? "font-couple text-7xl sm:text-9xl md:text-[10rem]" : "font-sinhala font-bold text-5xl sm:text-6xl md:text-7xl"}`}
         >
           {isEn ? wedding.bride.en : wedding.bride.si}
@@ -89,26 +96,33 @@ export const Hero = ({ onOpenInvitation, opened }: Props) => {
         <motion.h1
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 1, delay: 0.4 }}
+          transition={{ duration: reduceMotion ? 0.01 : 1, delay: reduceMotion ? 0 : 0.4 }}
           className={`relative z-10 leading-[1.3] py-3 px-2 text-gold-gradient drop-shadow-sm ${isEn ? "font-couple text-7xl sm:text-9xl md:text-[10rem]" : "font-sinhala font-bold text-5xl sm:text-6xl md:text-7xl"}`}
         >
           {isEn ? wedding.groom.en : wedding.groom.si}
         </motion.h1>
 
         {/* Swan Image (iOS OPTIMIZED: Added hardware acceleration for continuous bobbing) */}
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, scale: 0.8, y: 10 }}
-          animate={{ 
-            opacity: 1, 
-            scale: 1, 
-            y: [0, -6, 0] 
-          }}
-          transition={{ 
-            opacity: { duration: 1, delay: 0.7 },
-            scale: { duration: 1, delay: 0.7 },
-            y: { duration: 4, repeat: Infinity, ease: "easeInOut", delay: 1.5 } 
-          }}
-          // transform-gpu prevents lag during continuous y-axis animations
+          animate={
+            reduceMotion
+              ? { opacity: 1, scale: 1, y: 0 }
+              : {
+                  opacity: 1,
+                  scale: 1,
+                  y: [0, -6, 0],
+                }
+          }
+          transition={
+            reduceMotion
+              ? { duration: 0.01 }
+              : {
+                  opacity: { duration: 1, delay: 0.7 },
+                  scale: { duration: 1, delay: 0.7 },
+                  y: { duration: 4, repeat: Infinity, ease: "easeInOut", delay: 1.5 },
+                }
+          }
           className="relative z-10 my-6 transform-gpu will-change-transform [backface-visibility:hidden]"
         >
           <img 
@@ -122,7 +136,7 @@ export const Hero = ({ onOpenInvitation, opened }: Props) => {
         <motion.div
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 1.0 }}
+          transition={{ delay: reduceMotion ? 0 : 1.0, duration: reduceMotion ? 0.01 : 0.5 }}
           className="relative z-10 mt-2 mb-4 px-4 max-w-lg mx-auto"
         >
           <p className={`text-foreground/80 italic ${isEn ? "font-serif text-lg md:text-2xl leading-relaxed" : "font-sinhala text-base md:text-xl leading-loose"}`}>
@@ -136,15 +150,15 @@ export const Hero = ({ onOpenInvitation, opened }: Props) => {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 1.6, duration: 1 }}
-          onClick={() => window.scrollTo({ top: window.innerHeight, behavior: "smooth" })}
+          transition={{ delay: reduceMotion ? 0 : 1.6, duration: reduceMotion ? 0.01 : 1 }}
+          onClick={() => window.scrollTo({ top: window.innerHeight, behavior: reduceMotion ? "auto" : "smooth" })}
           className="relative mt-8 cursor-pointer z-20"
         >
           <div className="flex flex-col items-center px-8 py-3 rounded-[2rem] bg-white/40 backdrop-blur-md border border-primary/20 shadow-[0_4px_20px_rgba(212,175,55,0.15)] active:scale-95 transition-transform whitespace-nowrap touch-manipulation">
-            
+
             <motion.div
-              animate={{ opacity: [0.6, 1, 0.6] }}
-              transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+              animate={reduceMotion ? { opacity: 1 } : { opacity: [0.6, 1, 0.6] }}
+              transition={reduceMotion ? { duration: 0.01 } : { duration: 2, repeat: Infinity, ease: "easeInOut" }}
               className={`text-primary font-semibold uppercase mb-1 transform-gpu ${isEn ? "font-display text-xs md:text-sm tracking-[0.2em]" : "font-sinhala text-xs md:text-sm tracking-widest"}`}
             >
               {isEn ? "Swipe to Explore" : "පහළට යන්න"}
@@ -153,8 +167,8 @@ export const Hero = ({ onOpenInvitation, opened }: Props) => {
             {/* Double Animated Chevrons */}
             <div className="flex flex-col items-center -space-y-3.5 mt-1">
               <motion.div
-                animate={{ y: [0, 5, 0], opacity: [0.2, 1, 0.2] }}
-                transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut", delay: 0 }}
+                animate={reduceMotion ? { y: 0, opacity: 1 } : { y: [0, 5, 0], opacity: [0.2, 1, 0.2] }}
+                transition={reduceMotion ? { duration: 0.01 } : { duration: 1.5, repeat: Infinity, ease: "easeInOut", delay: 0 }}
                 className="transform-gpu will-change-transform"
               >
                 <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="text-primary drop-shadow-[0_2px_4px_rgba(217,119,6,0.3)]">
@@ -162,8 +176,8 @@ export const Hero = ({ onOpenInvitation, opened }: Props) => {
                 </svg>
               </motion.div>
               <motion.div
-                animate={{ y: [0, 5, 0], opacity: [0.2, 1, 0.2] }}
-                transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut", delay: 0.2 }}
+                animate={reduceMotion ? { y: 0, opacity: 1 } : { y: [0, 5, 0], opacity: [0.2, 1, 0.2] }}
+                transition={reduceMotion ? { duration: 0.01 } : { duration: 1.5, repeat: Infinity, ease: "easeInOut", delay: 0.2 }}
                 className="transform-gpu will-change-transform"
               >
                 <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="text-primary drop-shadow-[0_2px_4px_rgba(217,119,6,0.3)]">
@@ -171,7 +185,7 @@ export const Hero = ({ onOpenInvitation, opened }: Props) => {
                 </svg>
               </motion.div>
             </div>
-            
+
           </div>
         </motion.div>
       </div>
