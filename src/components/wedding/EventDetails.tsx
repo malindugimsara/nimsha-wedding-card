@@ -60,9 +60,9 @@ export const EventDetails = () => {
                   </svg>
                 </div>
 
-                {/* Top Arch Corner Vines */}
-                <SwirlingVine className="absolute -top-2 -left-2 w-40 h-40 text-[#cda052] dark:text-[#d4af37] opacity-60 dark:opacity-40 pointer-events-none z-0" />
-                <SwirlingVine className="absolute -top-2 -right-2 w-40 h-40 text-[#cda052] dark:text-[#d4af37] opacity-60 dark:opacity-40 pointer-events-none scale-x-[-1] z-0" />
+                Top Arch Corner Vines
+                {/* <SwirlingVine className="absolute -top-2 -left-2 w-40 h-40 text-[#cda052] dark:text-[#d4af37] opacity-60 dark:opacity-40 pointer-events-none z-0" />
+                <SwirlingVine className="absolute -top-2 -right-2 w-40 h-40 text-[#cda052] dark:text-[#d4af37] opacity-60 dark:opacity-40 pointer-events-none scale-x-[-1] z-0" /> */}
 
                 {/* Top Ornament */}
                 <LotusDivider width="w-20 mb-6 mt-4 opacity-80 text-[#cda052] relative z-10" />
@@ -126,7 +126,7 @@ export const EventDetails = () => {
                        ? "We joyfully await to share this beautiful beginning with you." 
                        : "අපගේ ජීවිතයේ මෙම සුවිශේෂී දිනය ඔබ සමඟ බෙදා ගැනීමට අපි සතුටින් බලාපොරොත්තු වෙමු."}
                    </p>
-                   <BottomFlourish className="w-12 h-auto text-[#cda052]/70 dark:text-[#d4af37]/70" />
+                   {/* <BottomFlourish className="w-12 h-auto text-[#cda052]/70 dark:text-[#d4af37]/70" /> */}
                 </div>
 
               </div>
@@ -138,33 +138,33 @@ export const EventDetails = () => {
   );
 };
 
-// ELEGANT SWIRLING VINE COMPONENT
-const SwirlingVine = ({ className = "" }: { className?: string }) => (
-  <svg viewBox="0 0 100 100" fill="none" className={className} aria-hidden="true">
-    <path d="M 5,95 C 20,80 40,65 50,45 C 55,30 65,20 85,15" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" />
-    <path d="M 30,75 C 10,65 15,45 30,40 C 45,35 55,55 45,65 C 38,72 25,65 30,58" stroke="currentColor" strokeWidth="0.8" strokeLinecap="round" />
-    <path d="M 55,40 C 45,40 35,25 45,15 C 55,5 65,15 60,25 C 57,30 50,28 53,22" stroke="currentColor" strokeWidth="0.6" strokeLinecap="round" />
-    <path d="M 45,65 C 60,75 80,85 95,75" stroke="currentColor" strokeWidth="0.5" strokeLinecap="round" />
-    <path d="M 45,55 Q 55,65 65,58 Q 55,48 45,55 Z" fill="currentColor" opacity="0.3" />
-    <path d="M 70,30 Q 80,25 85,35 Q 75,40 70,30 Z" fill="currentColor" opacity="0.4" />
-    <path d="M 25,85 Q 35,95 45,90 Q 35,80 25,85 Z" fill="currentColor" opacity="0.3" />
-    <path d="M 65,20 Q 75,10 85,15 Q 75,25 65,20 Z" fill="currentColor" opacity="0.5" />
-    <circle cx="88" cy="12" r="1" fill="currentColor" />
-    <circle cx="95" cy="73" r="0.8" fill="currentColor" />
-    <circle cx="28" cy="56" r="0.8" fill="currentColor" />
-  </svg>
-);
+// // ELEGANT SWIRLING VINE COMPONENT
+// const SwirlingVine = ({ className = "" }: { className?: string }) => (
+//   <svg viewBox="0 0 100 100" fill="none" className={className} aria-hidden="true">
+//     <path d="M 5,95 C 20,80 40,65 50,45 C 55,30 65,20 85,15" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" />
+//     <path d="M 30,75 C 10,65 15,45 30,40 C 45,35 55,55 45,65 C 38,72 25,65 30,58" stroke="currentColor" strokeWidth="0.8" strokeLinecap="round" />
+//     <path d="M 55,40 C 45,40 35,25 45,15 C 55,5 65,15 60,25 C 57,30 50,28 53,22" stroke="currentColor" strokeWidth="0.6" strokeLinecap="round" />
+//     <path d="M 45,65 C 60,75 80,85 95,75" stroke="currentColor" strokeWidth="0.5" strokeLinecap="round" />
+//     <path d="M 45,55 Q 55,65 65,58 Q 55,48 45,55 Z" fill="currentColor" opacity="0.3" />
+//     <path d="M 70,30 Q 80,25 85,35 Q 75,40 70,30 Z" fill="currentColor" opacity="0.4" />
+//     <path d="M 25,85 Q 35,95 45,90 Q 35,80 25,85 Z" fill="currentColor" opacity="0.3" />
+//     <path d="M 65,20 Q 75,10 85,15 Q 75,25 65,20 Z" fill="currentColor" opacity="0.5" />
+//     <circle cx="88" cy="12" r="1" fill="currentColor" />
+//     <circle cx="95" cy="73" r="0.8" fill="currentColor" />
+//     <circle cx="28" cy="56" r="0.8" fill="currentColor" />
+//   </svg>
+// );
 
-// TINY BOTTOM FLOURISH COMPONENT
-const BottomFlourish = ({ className = "" }: { className?: string }) => (
-  <svg viewBox="0 0 100 20" className={className} fill="none" aria-hidden="true">
-    <path d="M10,10 Q30,0 50,10 T90,10" stroke="currentColor" strokeWidth="0.8" strokeLinecap="round"/>
-    <path d="M35,10 Q50,18 65,10" stroke="currentColor" strokeWidth="0.8" strokeLinecap="round"/>
-    <circle cx="50" cy="10" r="2" fill="currentColor" />
-    <circle cx="20" cy="7.5" r="1" fill="currentColor" opacity="0.7"/>
-    <circle cx="80" cy="7.5" r="1" fill="currentColor" opacity="0.7"/>
-  </svg>
-);
+// // TINY BOTTOM FLOURISH COMPONENT
+// const BottomFlourish = ({ className = "" }: { className?: string }) => (
+//   <svg viewBox="0 0 100 20" className={className} fill="none" aria-hidden="true">
+//     <path d="M10,10 Q30,0 50,10 T90,10" stroke="currentColor" strokeWidth="0.8" strokeLinecap="round"/>
+//     <path d="M35,10 Q50,18 65,10" stroke="currentColor" strokeWidth="0.8" strokeLinecap="round"/>
+//     <circle cx="50" cy="10" r="2" fill="currentColor" />
+//     <circle cx="20" cy="7.5" r="1" fill="currentColor" opacity="0.7"/>
+//     <circle cx="80" cy="7.5" r="1" fill="currentColor" opacity="0.7"/>
+//   </svg>
+// );
 
 // Detail Block 
 const DetailBlock = ({ icon, label, value, isEn }: { icon: React.ReactNode; label: string; value: string; isEn: boolean }) => (
