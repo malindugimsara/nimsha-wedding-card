@@ -3,6 +3,13 @@ import { useEffect, useState } from "react";
 import coupleIntro from "@/assets/couple-intro.webp";
 import { Sparkles } from "./Decorations";
 
+const isIOS = typeof navigator !== "undefined" && /iPhone|iPad|iPod/i.test(navigator.userAgent);
+const prefersReducedMotion =
+  typeof window !== "undefined" &&
+  typeof window.matchMedia === "function" &&
+  window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+const reduceMotion = isIOS || prefersReducedMotion;
+
 interface Props {
   onComplete: () => void;
   duration?: number;
@@ -35,21 +42,21 @@ export const IntroScreen = ({ onComplete, duration = 3000 }: Props) => {
 
           {/* Floating petals */}
           <div className="pointer-events-none absolute inset-0 overflow-hidden">
-            {Array.from({ length: 16 }).map((_, i) => (
+            {Array.from({ length: reduceMotion ? 4 : 16 }).map((_, i) => (
               <motion.span
                 key={i}
-                className="absolute text-2xl"
-                style={{ left: `${Math.random() * 100}%`, top: `-10%` }}
-                animate={{
+                className={`absolute text-2xl ${reduceMotion ? "opacity-30" : ""}`}
+                style={{ left: `${(i * 37 + 13) % 100}%`, top: `-10%` }}
+                animate={reduceMotion ? undefined : {
                   y: ["-10vh", "110vh"],
-                  x: [0, Math.random() * 80 - 40],
+                  x: [0, (i % 5) * 16 - 32],
                   rotate: [0, 360],
                   opacity: [0, 1, 1, 0],
                 }}
-                transition={{
-                  duration: 8 + Math.random() * 6,
+                transition={reduceMotion ? undefined : {
+                  duration: 8 + (i % 6),
                   repeat: Infinity,
-                  delay: Math.random() * 4,
+                  delay: i % 4,
                   ease: "linear",
                 }}
               >
@@ -87,12 +94,12 @@ export const IntroScreen = ({ onComplete, duration = 3000 }: Props) => {
             {/* Soft pulsing glow ring */}
             <motion.div
               className="absolute inset-0 rounded-[2rem] pointer-events-none"
-              animate={{ boxShadow: [
+              animate={reduceMotion ? undefined : { boxShadow: [
                 "0 0 40px 0px hsl(42 90% 70% / 0.3)",
                 "0 0 90px 15px hsl(42 90% 70% / 0.55)",
                 "0 0 40px 0px hsl(42 90% 70% / 0.3)",
               ] }}
-              transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+              transition={reduceMotion ? undefined : { duration: 3, repeat: Infinity, ease: "easeInOut" }}
             />
           </motion.div>
 

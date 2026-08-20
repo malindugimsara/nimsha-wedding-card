@@ -1,3 +1,4 @@
+import { useMemo } from "react";
 import { motion } from "framer-motion";
 
 const isIOS = typeof navigator !== "undefined" && /iPhone|iPad|iPod/i.test(navigator.userAgent);
@@ -9,7 +10,15 @@ const reduceDecorations = isIOS || prefersReducedMotion;
 
 // Floating petals/sparkles overlay — purely decorative
 export const FloatingPetals = ({ count = 14 }: { count?: number }) => {
-  const petals = Array.from({ length: reduceDecorations ? Math.min(count, 4) : count });
+  const petals = useMemo(
+    () => Array.from({ length: reduceDecorations ? Math.min(count, 4) : count }, (_, index) => ({
+      left: (index * 37 + 11) % 100,
+      duration: reduceDecorations ? 18 + (index % 4) * 2 : 12 + (index % 7) * 2,
+      delay: reduceDecorations ? (index % 4) : (index % 10),
+      size: reduceDecorations ? 8 + (index % 4) * 2 : 8 + (index % 6) * 2,
+    })),
+    [count],
+  );
 
   if (reduceDecorations && count <= 0) {
     return null;
@@ -17,21 +26,18 @@ export const FloatingPetals = ({ count = 14 }: { count?: number }) => {
 
   return (
     <div className="pointer-events-none fixed inset-0 z-10 overflow-hidden" aria-hidden>
-      {petals.map((_, i) => {
-        const left = Math.random() * 100;
-        const duration = reduceDecorations ? 18 + Math.random() * 8 : 12 + Math.random() * 14;
-        const delay = reduceDecorations ? Math.random() * 4 : Math.random() * 10;
-        const size = reduceDecorations ? 8 + Math.random() * 8 : 8 + Math.random() * 12;
+      {petals.map((petal, i) => {
         return (
           <span
             key={i}
-            className="absolute top-0 animate-float-petal"
+            className={`absolute top-0 ${reduceDecorations ? "" : "animate-float-petal"}`}
             style={{
-              left: `${left}%`,
-              animationDuration: `${duration}s`,
-              animationDelay: `${delay}s`,
-              width: size,
-              height: size,
+              left: `${petal.left}%`,
+              animationDuration: `${petal.duration}s`,
+              animationDelay: `${petal.delay}s`,
+              width: petal.size,
+              height: petal.size,
+              opacity: reduceDecorations ? 0.45 : undefined,
             }}
           >
             <svg viewBox="0 0 20 20" className="w-full h-full opacity-60">
@@ -50,19 +56,25 @@ export const FloatingPetals = ({ count = 14 }: { count?: number }) => {
 
 export const Sparkles = ({ count = 6 }: { count?: number }) => {
   const sparkleCount = reduceDecorations ? Math.min(count, 6) : count;
+  const sparklePositions = useMemo(
+    () => Array.from({ length: sparkleCount }, (_, index) => ({
+      left: (index * 43 + 17) % 100,
+      top: (index * 61 + 23) % 100,
+      duration: reduceDecorations ? 0 : 2 + (index % 3),
+      delay: reduceDecorations ? 0 : (index % 3),
+    })),
+    [sparkleCount],
+  );
 
   return (
     <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden>
-      {Array.from({ length: sparkleCount }).map((_, i) => (
+      {sparklePositions.map((sparkle, i) => (
         <motion.span
           key={i}
           className="absolute"
-          style={{
-            left: `${Math.random() * 100}%`,
-            top: `${Math.random() * 100}%`,
-          }}
-          animate={reduceDecorations ? { opacity: [0.2, 0.8, 0.2], scale: [0.7, 1, 0.7] } : { opacity: [0, 1, 0], scale: [0.4, 1.2, 0.4] }}
-          transition={{ duration: reduceDecorations ? 3 + Math.random() * 2 : 2 + Math.random() * 2, repeat: Infinity, delay: Math.random() * 3 }}
+          style={{ left: `${sparkle.left}%`, top: `${sparkle.top}%` }}
+          animate={reduceDecorations ? undefined : { opacity: [0, 1, 0], scale: [0.4, 1.2, 0.4] }}
+          transition={reduceDecorations ? undefined : { duration: sparkle.duration, repeat: Infinity, delay: sparkle.delay }}
         >
           <svg width="14" height="14" viewBox="0 0 14 14">
             <path d="M7 0 L8 6 L14 7 L8 8 L7 14 L6 8 L0 7 L6 6 Z" fill="hsl(var(--primary))" />

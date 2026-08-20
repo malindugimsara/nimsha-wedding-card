@@ -9,6 +9,8 @@ import "swiper/css/effect-coverflow";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 
+const isIOS = typeof navigator !== "undefined" && /iPhone|iPad|iPod/i.test(navigator.userAgent);
+
 import g1 from "@/assets/gallery-1.webp";
 import g2 from "@/assets/gallery-2.webp";
 import g3 from "@/assets/gallery-3.webp";
@@ -59,12 +61,12 @@ export const Gallery = () => {
         </div>
 
         <Swiper
-          effect="coverflow"
+          effect={isIOS ? "slide" : "coverflow"}
           grabCursor
           centeredSlides
-          loop
+          loop={!isIOS}
           slidesPerView="auto"
-          autoplay={{ delay: 3500, disableOnInteraction: false }}
+          autoplay={isIOS ? false : { delay: 3500, disableOnInteraction: false }}
           coverflowEffect={{ rotate: 20, stretch: 0, depth: 150, modifier: 1.5, slideShadows: false }}
           pagination={{ clickable: true }}
           modules={[EffectCoverflow, Autoplay, Pagination, Navigation]}
