@@ -54,7 +54,7 @@ export const Countdown = () => {
         <div className="absolute bottom-[-10%] right-[-5%] w-[30rem] h-[30rem] border-[1px] border-primary/30 rounded-full" />
       </div>
 
-      {/* --- CUTE COUPLE ART (Moved to Background) --- */}
+     {/* --- CUTE COUPLE ART (Moved to Background) --- */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden z-0 flex items-center justify-center">
         <motion.div
           animate={{ 
@@ -66,7 +66,9 @@ export const Countdown = () => {
             repeat: Infinity, 
             ease: "easeInOut" 
           }}
-          className="relative w-[300px] md:w-[450px] opacity-35 dark:opacity-30"
+          // FIX: Added hardware acceleration classes for iOS Safari
+          className="relative w-[300px] md:w-[450px] opacity-35 dark:opacity-30 transform-gpu will-change-transform [backface-visibility:hidden]"
+          style={{ WebkitTransform: "translateZ(0)" }} 
         >
           <img 
             src={coupleArt} 
