@@ -41,34 +41,6 @@ export const Footer = () => {
       />
       {/* ------------------------------------------- */}
 
-      {/* Floating Background Hearts */}
-      <div className="absolute inset-0 pointer-events-none overflow-hidden z-0">
-        {[...Array(6)].map((_, i) => (
-          <motion.div
-            key={`footer-heart-${i}`}
-            className="absolute text-rose-300/40 dark:text-rose-900/40 text-sm md:text-base drop-shadow-sm"
-            initial={{ 
-              bottom: "-10%", 
-              left: `${15 * i + Math.random() * 10}%`,
-              scale: Math.random() * 0.5 + 0.5
-            }}
-            animate={{ 
-              bottom: "120%", 
-              x: [0, 20, -20, 0],
-              rotate: [0, 45, -45, 0]
-            }}
-            transition={{ 
-              duration: 12 + Math.random() * 8, 
-              repeat: Infinity, 
-              ease: "linear",
-              delay: Math.random() * 5
-            }}
-          >
-            ♥
-          </motion.div>
-        ))}
-      </div>
-
       <div className="container text-center relative z-10">
         <Ornament className="text-primary w-40 md:w-48 mx-auto mb-6 opacity-80" />
         
