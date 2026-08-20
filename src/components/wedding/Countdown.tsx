@@ -54,28 +54,16 @@ export const Countdown = () => {
         <div className="absolute bottom-[-10%] right-[-5%] w-[30rem] h-[30rem] border-[1px] border-primary/30 rounded-full" />
       </div>
 
-     {/* --- CUTE COUPLE ART (Moved to Background) --- */}
+      {/* --- CUTE COUPLE ART (Static Background) --- */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden z-0 flex items-center justify-center">
-        <motion.div
-          animate={{ 
-            y: [100, 40, 100],
-            rotate: [-2, 2, -2]
-          }}
-          transition={{ 
-            duration: 10, 
-            repeat: Infinity, 
-            ease: "easeInOut" 
-          }}
-          // FIX: Added hardware acceleration classes for iOS Safari
-          className="relative w-[300px] md:w-[450px] opacity-35 dark:opacity-30 transform-gpu will-change-transform [backface-visibility:hidden]"
-          style={{ WebkitTransform: "translateZ(0)" }} 
-        >
+        {/* Converted to a static div and positioned with translate-y-16 */}
+        <div className="relative w-[300px] md:w-[450px] opacity-35 dark:opacity-30 translate-y-16">
           <img 
             src={coupleArt} 
             alt="Bride and Groom Background" 
             className="w-full h-full object-contain mix-blend-multiply dark:mix-blend-screen"
           />
-        </motion.div>
+        </div>
       </div>
       {/* ------------------------------------------- */}
 
@@ -100,7 +88,6 @@ export const Countdown = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.1 }}
-              // CHANGED: Made background bg-white/10, dark:bg-black/10 and reduced blur to backdrop-blur-md
               className="relative glass-card bg-white/10 dark:bg-black/10 backdrop-blur-md rounded-[2rem] p-6 md:p-8 flex flex-col items-center justify-center border border-white/30 dark:border-white/10 shadow-sm overflow-hidden group hover:border-primary/40 transition-colors"
             >
               {/* Card Hover Effect */}
