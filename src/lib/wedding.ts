@@ -31,7 +31,7 @@ export const wedding = {
     date: "Thursday, October 15, 2026",
     dateSi: "2026 ඔක්තෝබර් මස 15 වන බ්‍රහස්පතින්දා",
     venue: "Hotel Alakamanda",
-    venueSi: "හෝටල් අලකමන්දා",
+    venueSi: "Hotel අලකමන්දා",
     address: "Anuradhapura",
     addressSi: "අනුරාධපුර",
     mapsQuery: "Hotel+Alakamanda+Anuradhapura",
@@ -54,7 +54,7 @@ export const wedding = {
     en: "Traditional",
     si: "සාම්ප්‍රදායික ඇඳුම්",
   },
-  contact: { name: "Gayan & Thathsarani", phone: "+94 707899049" },
+  contact: { name: "Gayan & Thathsarani", phone: "+94 707899049 / +94 713172985" },
 
   story: [
     { year: "2019", title: { en: "How We Met", si: "අපි මුණගැහුණා" }, text: { en: "A chance meeting that turned one conversation into endless ones.", si: "එක් කතා බසක් අනන්ත කතාබස් බවට පත් වූ අහඹු හමුවීමක්." } },

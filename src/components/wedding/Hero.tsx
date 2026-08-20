@@ -34,7 +34,7 @@ export const Hero = ({ onOpenInvitation, opened }: Props) => {
         <div className="absolute inset-0 bg-gradient-to-b from-background/70 via-background/40 to-background/90" />
       </div>
 
-      <Sparkles count={15} />
+      <Sparkles count={19} />
 
       {/* Floating Lotus Petals Animation for traditional theme */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
