@@ -6,7 +6,7 @@ import { Ornament } from "./Decorations";
 import { LotusDivider } from "./Ornaments";
 
 // Replace this with your actual image import
-import coupleArt from "@/assets/cute-couple.webp"; 
+// import coupleArt from "@/assets/cute-couple.webp"; 
 
 // කාලය ගණනය කරන ශ්‍රිතය (Calculate time difference)
 const calc = (target: Date) => {
@@ -56,14 +56,14 @@ export const Countdown = () => {
       {/* Added 'isolate' to force a new rendering layer, preventing iOS glitches */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden z-0 flex items-center justify-center isolate">
         {/* Lowered opacity since we removed the blend mode */}
-        <div className="relative w-[300px] md:w-[450px] opacity-20 dark:opacity-15 translate-y-16">
+        {/* <div className="relative w-[300px] md:w-[450px] opacity-20 dark:opacity-15 translate-y-16">
           <img 
             src={coupleArt} 
             alt="Bride and Groom Background" 
             // REMOVED mix-blend-multiply and mix-blend-screen for buttery smooth scrolling
             className="w-full h-full object-contain"
           />
-        </div>
+        </div> */}
       </div>
       {/* ------------------------------------------- */}
 
