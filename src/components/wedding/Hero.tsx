@@ -15,10 +15,6 @@ export const Hero = ({ onOpenInvitation, opened }: Props) => {
   const { lang } = useWedding();
   const isEn = lang === "en";
   
-  const dateStr = isEn ? wedding.ceremony.date : wedding.ceremony.dateSi;
-  const venueStr = isEn ? wedding.ceremony.venue : wedding.ceremony.venueSi;
-  const addressStr = isEn ? wedding.ceremony.address : wedding.ceremony.addressSi;
-
   return (
     <section id="home" className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden bg-gradient-soft">
       
@@ -58,7 +54,6 @@ export const Hero = ({ onOpenInvitation, opened }: Props) => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          // Increased En size: text-xs md:text-base (was text-[10px] md:text-sm)
           className={`relative z-10 font-front uppercase text-primary-deep mb-6 mt-10 ${isEn ? "font-display text-xs md:text-base tracking-[0.3em]" : "font-sinhala text-sm md:text-base tracking-widest font-semibold"}`}
         >
           {isEn ? "You are warmly invited" : "ඔබට ආදරයෙන් ආරාධනා කරමි"}
@@ -73,7 +68,6 @@ export const Hero = ({ onOpenInvitation, opened }: Props) => {
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 1, delay: 0.2 }}
-          // Increased En size: text-8xl sm:text-9xl md:text-[10rem] (was text-7xl sm:text-8xl md:text-9xl)
           className={`relative z-10 leading-[1.3] py-3 px-2 text-gold-gradient drop-shadow-sm ${isEn ? "font-couple text-7xl sm:text-9xl md:text-[10rem]" : "font-sinhala font-bold text-5xl sm:text-6xl md:text-7xl"}`}
         >
           {isEn ? wedding.bride.en : wedding.bride.si}
@@ -93,7 +87,6 @@ export const Hero = ({ onOpenInvitation, opened }: Props) => {
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 1, delay: 0.4 }}
-          // Increased En size: text-8xl sm:text-9xl md:text-[10rem]
           className={`relative z-10 leading-[1.3] py-3 px-2 text-gold-gradient drop-shadow-sm ${isEn ? "font-couple text-7xl sm:text-9xl md:text-[10rem]" : "font-sinhala font-bold text-5xl sm:text-6xl md:text-7xl"}`}
         >
           {isEn ? wedding.groom.en : wedding.groom.si}
@@ -121,27 +114,20 @@ export const Hero = ({ onOpenInvitation, opened }: Props) => {
           />
         </motion.div>
 
-        {/* Translated Date */}
-        <motion.p
+        {/* --- NEW ROMANTIC QUOTE (Replaces Date & Location) --- */}
+        <motion.div
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 1.0 }}
-          // Increased En size: text-sm md:text-lg (was text-xs md:text-sm)
-          className={`relative z-10 uppercase text-foreground/85 font-semibold mt-2 ${isEn ? "font-display tracking-[0.2em] text-sm md:text-lg" : "font-sinhala tracking-widest text-sm md:text-base"}`}
+          className="relative z-10 mt-2 mb-4 px-4 max-w-lg mx-auto"
         >
-          {dateStr}
-        </motion.p>
-
-        {/* Venue & Address */}
-        <motion.p
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1.2 }}
-          // Increased En size: text-base md:text-xl (was text-sm md:text-lg)
-          className={`relative z-10 mt-3 px-4 text-muted-foreground ${isEn ? "font-serif italic text-base md:text-xl" : "font-sinhala text-sm md:text-base"}`}
-        >
-          {venueStr} <span className="mx-2 text-primary">✦</span> {addressStr}
-        </motion.p>
+          <p className={`text-foreground/80 italic ${isEn ? "font-serif text-lg md:text-2xl leading-relaxed" : "font-sinhala text-base md:text-xl leading-loose"}`}>
+            {isEn 
+              ? '"Two souls but with a single thought, two hearts that beat as one."' 
+              : '"එකම සිතුවිල්ලකින් බැඳුණු ආත්ම දෙකක්, එකම රිද්මයකට ගැහෙන හදවත් දෙකක්."'}
+          </p>
+        </motion.div>
+        {/* ---------------------------------------------------- */}
 
         {/* Swipe/Scroll Hint Button */}
         <motion.div
@@ -149,14 +135,13 @@ export const Hero = ({ onOpenInvitation, opened }: Props) => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 1.6, duration: 1 }}
           onClick={() => window.scrollTo({ top: window.innerHeight, behavior: "smooth" })}
-          className="relative mt-12 cursor-pointer z-20"
+          className="relative mt-8 cursor-pointer z-20"
         >
           <div className="flex flex-col items-center px-8 py-3 rounded-[2rem] bg-white/40 backdrop-blur-md border border-primary/20 shadow-[0_4px_20px_rgba(212,175,55,0.15)] active:scale-95 transition-transform whitespace-nowrap touch-manipulation">
             
             <motion.div
               animate={{ opacity: [0.6, 1, 0.6] }}
               transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-              // Increased En size: text-xs md:text-sm (was text-[10px] md:text-xs)
               className={`text-primary font-semibold uppercase mb-1 ${isEn ? "font-display text-xs md:text-sm tracking-[0.2em]" : "font-sinhala text-xs md:text-sm tracking-widest"}`}
             >
               {isEn ? "Swipe to Explore" : "පහළට යන්න"}

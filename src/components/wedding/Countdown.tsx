@@ -5,6 +5,9 @@ import { useWedding } from "@/lib/wedding-context";
 import { Ornament } from "./Decorations";
 import { LotusDivider } from "./Ornaments";
 
+// Replace this with your actual image import
+import coupleArt from "@/assets/cute-couple.webp"; 
+
 // කාලය ගණනය කරන ශ්‍රිතය (Calculate time difference)
 const calc = (target: Date) => {
   const diff = Math.max(0, target.getTime() - Date.now());
@@ -51,6 +54,29 @@ export const Countdown = () => {
         <div className="absolute bottom-[-10%] right-[-5%] w-[30rem] h-[30rem] border-[1px] border-primary/30 rounded-full" />
       </div>
 
+      {/* --- CUTE COUPLE ART (Moved to Background) --- */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden z-0 flex items-center justify-center">
+        <motion.div
+          animate={{ 
+            y: [100, 40, 100],
+            rotate: [-2, 2, -2]
+          }}
+          transition={{ 
+            duration: 10, 
+            repeat: Infinity, 
+            ease: "easeInOut" 
+          }}
+          className="relative w-[300px] md:w-[450px] opacity-35 dark:opacity-30"
+        >
+          <img 
+            src={coupleArt} 
+            alt="Bride and Groom Background" 
+            className="w-full h-full object-contain mix-blend-multiply dark:mix-blend-screen"
+          />
+        </motion.div>
+      </div>
+      {/* ------------------------------------------- */}
+
       <div className="container text-center relative z-10 px-4">
         <LotusDivider  width="w-20 sm:w-28" />
         <Ornament className="text-primary w-32 md:w-40 mx-auto mb-6 opacity-80" />
@@ -63,7 +89,7 @@ export const Countdown = () => {
           {dateStr}
         </p>
 
-        {/* Countdown Cards Grid (Mobile responsive) */}
+        {/* Countdown Cards Grid (Highly Transparent) */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 max-w-4xl mx-auto">
           {items.map((it, i) => (
             <motion.div
@@ -72,14 +98,15 @@ export const Countdown = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.1 }}
-              className="relative glass-card bg-rose-50/50 dark:bg-black/20 backdrop-blur-xl rounded-[2rem] p-6 md:p-8 flex flex-col items-center justify-center border border-rose-200/50 dark:border-white/5 shadow-sm overflow-hidden group hover:border-primary/40 transition-colors"
+              // CHANGED: Made background bg-white/10, dark:bg-black/10 and reduced blur to backdrop-blur-md
+              className="relative glass-card bg-white/10 dark:bg-black/10 backdrop-blur-md rounded-[2rem] p-6 md:p-8 flex flex-col items-center justify-center border border-white/30 dark:border-white/10 shadow-sm overflow-hidden group hover:border-primary/40 transition-colors"
             >
               {/* Card Hover Effect */}
               <div className="absolute inset-0 rounded-[2rem] bg-gold-gradient opacity-0 group-hover:opacity-10 transition-opacity" />
               
               {/* Lotus Corners for each card */}
-              <LotusCorner className="absolute top-2 left-2 w-8 text-primary/20" />
-              <LotusCorner className="absolute bottom-2 right-2 w-8 text-primary/20 scale-x-[-1] scale-y-[-1]" />
+              <LotusCorner className="absolute top-3 left-3 w-8 text-primary/30" />
+              <LotusCorner className="absolute bottom-3 right-3 w-8 text-primary/30 scale-x-[-1] scale-y-[-1]" />
 
               {/* Number */}
               <motion.div
@@ -92,7 +119,7 @@ export const Countdown = () => {
               </motion.div>
               
               {/* Label */}
-              <div className={`mt-2 text-primary/80 uppercase ${isEn ? "font-display text-[10px] md:text-xs tracking-[0.3em]" : "font-sinhala font-bold text-xs md:text-sm tracking-widest"}`}>
+              <div className={`mt-2 text-primary/90 uppercase ${isEn ? "font-display text-[10px] md:text-xs tracking-[0.3em]" : "font-sinhala font-bold text-xs md:text-sm tracking-widest"}`}>
                 {it.l}
               </div>
             </motion.div>

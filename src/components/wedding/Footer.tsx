@@ -1,8 +1,11 @@
+import { motion } from "framer-motion";
 import { FaWhatsapp, FaFacebookF, FaHeart } from "react-icons/fa";
 import { wedding } from "@/lib/wedding";
 import { useWedding } from "@/lib/wedding-context";
 import { Ornament } from "./Decorations";
 
+// IMPORT YOUR IMAGE HERE:
+import cornerArt from "@/assets/footerImage.webp"; //
 export const Footer = () => {
   const { lang } = useWedding();
   const isEn = lang === "en";
@@ -15,20 +18,85 @@ export const Footer = () => {
   const waMsg = encodeURIComponent(isEn ? waMsgEn : waMsgSi);
 
   return (
-    <footer className="relative py-12 lg:py-16 bg-gradient-soft border-t border-rose-200/50 dark:border-primary/20 overflow-hidden font-sans">
+    <footer className="relative py-16 lg:py-20 bg-gradient-soft border-t border-rose-200/50 dark:border-primary/20 overflow-hidden font-sans">
       
       {/* Subtle Background Theme Element */}
       <div className="absolute inset-0 pointer-events-none opacity-30 dark:opacity-10 z-0 flex justify-center items-end">
         <div className="w-[40rem] h-[20rem] border-t-[1px] border-primary/20 rounded-t-full translate-y-1/2" />
       </div>
 
+      {/* --- YOUR IMAGE: BOTTOM CORNER FLOURISHES --- */}
+      {/* Left Corner */}
+      <img 
+        src={cornerArt} // <-- Uses your imported image
+        alt="Corner Design"
+        className="absolute bottom-0 left-0 w-32 md:w-48 lg:w-56 opacity-40 dark:opacity-30 pointer-events-none z-0 mix-blend-multiply dark:invert"
+      />
+      
+      {/* Right Corner (Flipped horizontally using scale-x-[-1]) */}
+      <img 
+        src={cornerArt} // <-- Uses your imported image
+        alt="Corner Design"
+        className="absolute bottom-0 right-0 w-32 md:w-48 lg:w-56 opacity-40 dark:opacity-30 pointer-events-none scale-x-[-1] z-0 mix-blend-multiply dark:invert"
+      />
+      {/* ------------------------------------------- */}
+
+      {/* Floating Background Hearts */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden z-0">
+        {[...Array(6)].map((_, i) => (
+          <motion.div
+            key={`footer-heart-${i}`}
+            className="absolute text-rose-300/40 dark:text-rose-900/40 text-sm md:text-base drop-shadow-sm"
+            initial={{ 
+              bottom: "-10%", 
+              left: `${15 * i + Math.random() * 10}%`,
+              scale: Math.random() * 0.5 + 0.5
+            }}
+            animate={{ 
+              bottom: "120%", 
+              x: [0, 20, -20, 0],
+              rotate: [0, 45, -45, 0]
+            }}
+            transition={{ 
+              duration: 12 + Math.random() * 8, 
+              repeat: Infinity, 
+              ease: "linear",
+              delay: Math.random() * 5
+            }}
+          >
+            ♥
+          </motion.div>
+        ))}
+      </div>
+
       <div className="container text-center relative z-10">
-        <Ornament className="text-primary w-40 md:w-48 mx-auto mb-8 opacity-80" />
+        <Ornament className="text-primary w-40 md:w-48 mx-auto mb-6 opacity-80" />
+        
+        {/* Sweet Closing Message */}
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="mb-8"
+        >
+          <p className={`text-foreground/70 italic ${isEn ? "font-serif text-lg" : "font-sinhala text-base"}`}>
+            {isEn ? "Thank you for being a part of our story." : "අපගේ ආදර කතාවේ කොටස්කරුවෙකු වීම ගැන ස්තූතියි."}
+          </p>
+        </motion.div>
         
         {/* භාෂාවට අනුව නම් දර්ශනය වීම */}
         <h3 className={`py-2 px-2 text-gold-gradient drop-shadow-sm flex flex-col md:flex-row items-center justify-center gap-2 md:gap-4 ${isEn ? "font-script text-5xl md:text-6xl" : "font-sinhala font-bold text-4xl md:text-5xl"}`}>
           <span>{isEn ? wedding.bride.en : wedding.bride.si}</span> 
-          <span className="font-script text-primary/80 text-4xl md:text-5xl">&</span> 
+          
+          {/* Pulsing Ampersand */}
+          <motion.span 
+            animate={{ scale: [1, 1.1, 1] }} 
+            transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+            className="font-script text-primary/80 text-4xl md:text-5xl"
+          >
+            &
+          </motion.span> 
+          
           <span>{isEn ? wedding.groom.en : wedding.groom.si}</span>
         </h3>
         
@@ -36,13 +104,8 @@ export const Footer = () => {
           {wedding.hashtag}
         </p>
 
-        {/* Credits Section */}
-        <div className="mt-5 lg:mt-16 pt-8 border-t border-primary/15">
-          <p className="font-serif italic text-foreground/70 flex items-center justify-center gap-2 text-sm">
-            Design with <FaHeart className="text-rose-400 drop-shadow-sm animate-pulse" /> by CodeCraft
-          </p>
-           {/* Social Share Buttons (Themed) */}
-        <div className="flex justify-center gap-4 mt-8 lg:mt-10">
+        {/* Social Share Buttons (Themed) */}
+        <div className="flex justify-center gap-5 mt-10">
           <a
             href={`https://wa.me/94788536767?text=${waMsg}`}
             target="_blank"
@@ -63,6 +126,12 @@ export const Footer = () => {
             <FaFacebookF className="w-5 h-5" />
           </a>
         </div>
+
+        {/* Credits Section */}
+        <div className="mt-12 pt-8 border-t border-primary/15 flex flex-col items-center">
+          <p className="font-serif italic text-foreground/70 flex items-center justify-center gap-2 text-sm">
+            Design with <FaHeart className="text-rose-400 drop-shadow-sm animate-pulse" /> by CodeCraft
+          </p>
           <p className="font-display text-[8px] tracking-[0.3em] uppercase text-muted-foreground mt-3">
             © {new Date().getFullYear()} CodeCraft. All rights reserved.
           </p>

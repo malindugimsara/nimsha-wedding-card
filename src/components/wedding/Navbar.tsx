@@ -31,8 +31,8 @@ export const Navbar = () => {
   return (
     <header
       className={cn(
-        "fixed top-0 inset-x-0 z-[999] pointer-events-auto transition-all duration-500",
-        scrolled ? "py-3 glass-card !rounded-none border-b" : "py-5 bg-transparent border-transparent"
+        "fixed top-0 inset-x-0 z-[999] pointer-events-auto transition-all duration-500 bg-transparent border-transparent",
+        scrolled ? "py-3" : "py-5"
       )}
     >
       <nav className="container flex items-center justify-between relative z-[999]">
@@ -55,7 +55,6 @@ export const Navbar = () => {
         </div>
 
         <div className="flex items-center gap-2 relative z-[999]">
-          {/* FIX: Removed 'hidden sm:flex' and added 'flex items-center' */}
           <button
             onClick={() => setLang(lang === "en" ? "si" : "en")}
             className="flex items-center h-9 px-3 rounded-full border border-primary/40 text-xs font-display tracking-widest hover:bg-primary/10 transition-colors pointer-events-auto"
