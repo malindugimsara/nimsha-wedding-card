@@ -46,32 +46,8 @@ export const Footer = () => {
           className="absolute bottom-0 right-0 w-32 md:w-48 lg:w-56 opacity-40 dark:opacity-30 mix-blend-multiply dark:invert scale-x-[-1] transform-gpu will-change-transform [backface-visibility:hidden]"
         />
 
-        {/* Floating Background Hearts (Also hardware accelerated) */}
-        {[...Array(6)].map((_, i) => (
-          <motion.div
-            key={`footer-heart-${i}`}
-            // Added transform-gpu for buttery smooth 60fps animation on mobile
-            className="absolute text-rose-300/40 dark:text-rose-900/40 text-sm md:text-base drop-shadow-sm transform-gpu"
-            initial={{ 
-              bottom: "-10%", 
-              left: `${15 * i + Math.random() * 10}%`,
-              scale: Math.random() * 0.5 + 0.5
-            }}
-            animate={{ 
-              bottom: "120%", 
-              x: [0, 20, -20, 0],
-              rotate: [0, 45, -45, 0]
-            }}
-            transition={{ 
-              duration: 12 + Math.random() * 8, 
-              repeat: Infinity, 
-              ease: "linear",
-              delay: Math.random() * 5
-            }}
-          >
-            ♥
-          </motion.div>
-        ))}
+        
+  
       </div>
       {/* ------------------------------------------- */}
 
