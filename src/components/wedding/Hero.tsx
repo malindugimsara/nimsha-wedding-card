@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import { useWedding } from "@/lib/wedding-context";
 import { wedding } from "@/lib/wedding";
 import { Ornament, Sparkles } from "./Decorations";
-import heroFloral from "@/assets/hero-floral.png";
+import heroFloral from "@/assets/hero-floral.webp";
 import swanImg from "@/assets/swam.webp"; 
 import { LotusDivider } from "./Ornaments";
 

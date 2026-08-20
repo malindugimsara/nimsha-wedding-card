@@ -4,7 +4,7 @@ import { wedding } from "@/lib/wedding";
 import { useWedding } from "@/lib/wedding-context";
 import { mapsUrl } from "@/lib/calendar";
 import { Ornament } from "./Decorations";
-import heroFloral from "@/assets/hero-floral.png"; // .png හෝ .jpg ඔබ සතුව ඇති extension එක භාවිතා කරන්න
+import heroFloral from "@/assets/hero-floral.webp"; 
 import { LotusDivider } from "./Ornaments";
 
 export const EventDetails = () => {
